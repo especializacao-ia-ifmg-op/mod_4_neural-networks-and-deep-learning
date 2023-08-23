@@ -26,6 +26,7 @@ class Perceptron:
                     self.weights[0] += update # update activation limiar: tetha <- tetha + eta * (dk - y)
                     #print(f'[INFO] Weights: {self.weights}')
             if hasError == False:
+                print(f'[INFO] \tConverged after: {epoch + 1} epochs.')
                 break
         print(f'[INFO] \tFinal weights: {self.weights}')
         print(f'[INFO] \tTotal of epochs: {epoch + 1}')
@@ -71,11 +72,23 @@ if __name__ == "__main__":
     print(f'\t[INFO] OK!')
 
     # Testing the perceptron
+    print(f'\n[INFO] Loading testing dataset...')
+    file = open('tab_teste1.dat', 'r')
+    results = list()
+
+    for line in file:
+        columns = line.split()
+        columns = np.array(columns, dtype=float)
+        results.append(columns[:])
+        
+    testing_data = np.array(results)
+    print(f'\t[INFO] OK!')
+
     print(f'\n[INFO] Getting information about testing dataset...')    
-    # print(f'[INFO] \tTesting dataset size = {test_data.shape[0]}')
-    print(f'[INFO] \tTesting dataset size = {training_data.shape[0]}')
+    # print(f'[INFO] \tTesting dataset size = {training_data.shape[0]}')
+    print(f'[INFO] \tTesting dataset size = {testing_data.shape[0]}')
     print(f'\n[INFO] Running testing data...')
-    #for inputs in test_data:
-    for inputs in training_data:
+    # for inputs in training_data:
+    for inputs in testing_data:
         result = perceptron.predict(inputs)
         print(f"[INFO] \tInput: {inputs} -> Output: {result}")

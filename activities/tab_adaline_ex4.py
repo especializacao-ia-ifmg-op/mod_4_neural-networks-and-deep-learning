@@ -76,10 +76,23 @@ if __name__ == "__main__":
     print(f'[INFO] \tOK!')
 
     # # Testing the adaline
+    print(f'\n[INFO] Loading testing dataset...')
+    file = open('tab_teste2.dat', 'r')
+    results = list()
+
+    for line in file:
+        columns = line.split()
+        columns = np.array(columns, dtype=float)
+        results.append(columns[:])
+        
+    testing_data = np.array(results)
+    print(f'\t[INFO] OK!')
+
     print(f'\n[INFO] Getting information about testing dataset...')
-    #print(f'[INFO] Testing dataset size = {test_data.shape[0]}')
-    print(f'[INFO] Testing dataset size = {training_data.shape[0]}')
+    # print(f'[INFO] Testing dataset size = {training_data.shape[0]}')
+    print(f'[INFO] \tTesting dataset size = {testing_data.shape[0]}')
     print(f'\n[INFO] Running testing data...')
-    for inputs in training_data:
+    # for inputs in training_data:
+    for inputs in testing_data:
         result = adaline.predict(inputs)
-        print(f"[INFO] \tInput: {inputs} Output: {result}")
+        print(f"[INFO] \tInput: {inputs} -> Output: {result}")
