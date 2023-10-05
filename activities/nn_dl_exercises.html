@@ -1,0 +1,3271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>nn_dl_exercises</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="nn_dl_exercises_files/libs/clipboard/clipboard.min.js"></script>
+<script src="nn_dl_exercises_files/libs/quarto-html/quarto.js"></script>
+<script src="nn_dl_exercises_files/libs/quarto-html/popper.min.js"></script>
+<script src="nn_dl_exercises_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="nn_dl_exercises_files/libs/quarto-html/anchor.min.js"></script>
+<link href="nn_dl_exercises_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="nn_dl_exercises_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="nn_dl_exercises_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="nn_dl_exercises_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="nn_dl_exercises_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<hr>
+<p><strong>Instituto Federal de Educação, Ciência e Tecnologia de Minas Gerais - Campus Ouro Preto</strong><br> <strong>Especialização em Inteligência Artificial</strong><br> <strong>Disciplina: Redes Neurais e Aprendizado Profundo</strong><br> <strong>Profs.: Dr.&nbsp;Agnaldo José da Rocha Reis</strong><br> <strong>Alunos: Fernando dos Santos Alves Fernandes, Ivanete Fátima de Azevedo e Marco Antônio do Nascimento</strong> ****</p>
+<ol type="1">
+<li>O que é inteligência para você(s)?</li>
+</ol>
+<p><em>Entendemos a inteligência como uma combinação de conceitos como a sabedoria, o conhecimento, a transformação da mente e a virtude. Para nós, a sabedoria seria a capacidade de compreensão do indivíduo, dado uma informação transmitida a ele. O conhecimento pode ser visto como a consciência adquirida por meio da experiência, estudo ou introspecção, capacitando uma pessoa a interpretar e agir no mundo. A transformação da mente é a capacidade de uma pessoa de mudar seus pensamentos e perspectivas ao longo do tempo, sendo assim uma busca constante por um entendimento de evolução intelectual. Por fim temos a virtude que é a capacidade do indivíduo em buscar a excelência moral e ética, não apenas a excelência intelectual. Isso posto, a inteligência, para nós, não é apenas uma capacidade intelectual do indivíduo, mas também envolve a busca por virtude e a capacidade de transformação da mente. O conceito de inteligência também pode ser associado à capacidade humana de tomar decisões e resolver problemas; à capacidade de se adaptar a diferentes situações; à capacidade de aprender algo novo, a partir da detecção de padrões.</em></p>
+<ol start="2" type="1">
+<li>Em sua opinião (ou na do grupo), o que aconteceria se alguém descobrisse como implementar uma IA mais abrangente (e.g., AGI) em um robô?</li>
+</ol>
+<p><em>Em algumas tarefas, as máquinas já são capazes de ter um desempenho semelhante ou melhor do que o ser humano, por exemplo, no processamento e análise de dados e imagens. De qualquer forma, os modelos de inteligência artificial atuais são capazes de resolver tarefas específicas. No momento em que for possível o desenvolvimento e implantação de uma IA mais abrangente em um robô, principalmente, se (ou quando) alcançarmos uma AGI (Artificial General Intelligence), para alguns pesquisadores, estaremos diante de um risco à raça humana; para outros, esse é o propósito das pesquisas em Inteligência Artificial. Acreditamos que a implementação de uma IA mais abrangente, como a AGI em robôs, representa uma potencial revolução para a sociedade, podendo causar avanços em diversas esferas, desde a automação industrial até aplicações médicas e pesquisa científica. Dentro da automação industrial, uma AGI poderia otimizar processos em setores variados, elevando eficiência na produção, logística e serviços. Na medicina, os benefícios seriam notáveis, com robôs utilizando IAG para diagnósticos mais precisos, execução de cirurgias complexas e até mesmo fornecimento de suporte emocional a pacientes. Contudo, diversos dilemas éticos podem surgir e demandam reflexões profundas sobre temas como responsabilidade, privacidade e acesso à tecnologia. Além disso, a regulamentação torna-se um ponto que merece atenção, dado que a sociedade deveria estabelecer diretrizes claras para o desenvolvimento e uso responsável da AGI, crucial para assegurar a segurança, transparência e conformidade ética. De todo modo, acreditamos que uma AGI deve ser vista como uma ferramenta para aprimorar capacidades humanas e não uma força substitutiva. Isso posto, precisamos interpretar esse dilema de forma cautelosa e ética, alinhada aos valores fundamentais da sociedade, para garantir que os benefícios da AGI sejam amplamente distribuídos, preservando o bem-estar humano numa era de transformação tecnológica.</em></p>
+<ol start="3" type="1">
+<li>A partir da análise de um processo de destilação fracionada de petróleo observou-se que determinado óleo poderia ser classificado em duas classes de pureza {C1 e C2}, mediante a medição de três grandezas {x1, x2 e x3} que representam algumas das propriedades físico-químicas do óleo. Para tanto, pretende-se utilizar um perceptron para executar a classificação automática dessas duas classes. Assim, baseadas nas informações coletadas do processo, formou-se o conjunto de treinamento em anexo1, tomando por convenção o valor –1 para óleo pertencente à classe C1 e o valor +1 para óleo pertencente à classe C2.</li>
+</ol>
+<p>Daí, pede-se:</p>
+<ol type="a">
+<li>Execute dois treinamentos para a rede perceptron, inicializando-se o vetor de pesos em cada treinamento com valores aleatórios entre zero e um de tal forma que os elementos do vetor de pesos iniciais não sejam os mesmos.</li>
+</ol>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Perceptron:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, num_features, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_features <span class="op">=</span> num_features</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.learning_rate <span class="op">=</span> learning_rate</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.epochs <span class="op">=</span> epochs</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weights <span class="op">=</span> np.random.rand(num_features <span class="op">+</span> <span class="dv">1</span>)  <span class="co"># initial random weights +1 for the bias term</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.initialWeights <span class="op">=</span> <span class="va">self</span>.weights</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Random initial weights: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>weights<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, inputs): <span class="co"># activation function</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        summation <span class="op">=</span> np.dot(inputs, <span class="va">self</span>.weights[<span class="dv">1</span>:]) <span class="op">+</span> <span class="va">self</span>.weights[<span class="dv">0</span>] <span class="co"># activation potential: u</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="cf">if</span> summation <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="op">-</span><span class="dv">1</span> <span class="co"># Use of the bipolar step function</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> train(<span class="va">self</span>, training_data, labels):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        hasError <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.epochs):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(f'[INFO] Epoch: {epoch}')</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            hasError <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> inputs, label <span class="kw">in</span> <span class="bu">zip</span>(training_data, labels):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                prediction <span class="op">=</span> <span class="va">self</span>.predict(inputs) <span class="co"># return of activation function: y</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> prediction <span class="op">!=</span> label:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    hasError <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                    update <span class="op">=</span> <span class="va">self</span>.learning_rate <span class="op">*</span> (label <span class="op">-</span> prediction) <span class="co"># eta * (dk - y)</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.weights[<span class="dv">1</span>:] <span class="op">+=</span> update <span class="op">*</span> inputs <span class="co"># update weights: w &lt;- w + eta * (dk - y) * xk</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.weights[<span class="dv">0</span>] <span class="op">+=</span> update <span class="co"># update activation limiar: tetha &lt;- tetha + eta * (dk - y)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#print(f'[INFO] Weights: {self.weights}')</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> hasError <span class="op">==</span> <span class="va">False</span>:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Converged after: </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> epochs.'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Final weights: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>weights<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Total of epochs: </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getInitialWeights(<span class="va">self</span>):</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.initialWeights</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getFinalWeights(<span class="va">self</span>):</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] ###### Perceptron Implementation #######'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Loading training dataset and labels...'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">'tab_treinamento1.dat'</span>, <span class="st">'r'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> line.split()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> np.array(columns, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    results.append(columns[:<span class="dv">3</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    l.append(columns[<span class="op">-</span><span class="dv">1</span>:])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>training_data <span class="op">=</span> np.array(results)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> np.array(l)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\t</span><span class="ss">[INFO] OK!'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#training_data = np.array([[0.6508, 0.1097, 4.0009], [-1.4492, 0.8896, 4.4005], [2.085, 0.6876, 1.2071], [0.2626, 1.1476, 7.7985], [0.6418, 1.0234, 7.0427], [0.2569, 0.673, 8.3265], [1.1155, 0.6043, 7.4446], [0.0914, 0.3399, 7.0677], [0.0121, 0.5256, 4.6316], [-0.0429, 0.466, 5.4323], [0.434, 0.687, 8.2287], [0.2735, 1.0287, 7.1934], [0.4839, 0.4851, 7.485], [0.4089, -0.1267, 5.5019], [1.4391, 0.1614, 8.5843], [-0.9115,  -0.1973, 2.1962], [0.3654, 1.0475, 7.4858], [0.2144, 0.7515, 7.1699], [0.2013, 1.0014, 6.5489], [0.6483, 0.2183, 5.8991], [-0.1147, 0.2242, 7.2435], [-0.797, 0.8795, 3.8762], [-1.0625, 0.6366, 2.4707], [0.5307, 0.1285, 5.6883], [-1.22, 0.7777, 1.7252], [0.3957, 0.1076, 5.6623], [-0.1013, 0.5989, 7.1812], [2.4482, 0.9455, 11.2095], [2.0149, 0.6192, 10.9263], [0.2012, 0.2611, 5.4631]])</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#labels = np.array([-1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1])</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about training dataset...'</span>) </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] Training dataset: </span><span class="ch">\n</span><span class="sc">{</span>training_data<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] Labels of training dataset: </span><span class="ch">\n</span><span class="sc">{</span>labels<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] ###### Perceptron Implementation #######
+
+[INFO] Loading training dataset and labels...
+    [INFO] OK!
+
+[INFO] Getting information about training dataset...
+[INFO] Training dataset: 
+[[-0.6508  0.1097  4.0009]
+ [-1.4492  0.8896  4.4005]
+ [ 2.085   0.6876 12.071 ]
+ [ 0.2626  1.1476  7.7985]
+ [ 0.6418  1.0234  7.0427]
+ [ 0.2569  0.673   8.3265]
+ [ 1.1155  0.6043  7.4446]
+ [ 0.0914  0.3399  7.0677]
+ [ 0.0121  0.5256  4.6316]
+ [-0.0429  0.466   5.4323]
+ [ 0.434   0.687   8.2287]
+ [ 0.2735  1.0287  7.1934]
+ [ 0.4839  0.4851  7.485 ]
+ [ 0.4089 -0.1267  5.5019]
+ [ 1.4391  0.1614  8.5843]
+ [-0.9115 -0.1973  2.1962]
+ [ 0.3654  1.0475  7.4858]
+ [ 0.2144  0.7515  7.1699]
+ [ 0.2013  1.0014  6.5489]
+ [ 0.6483  0.2183  5.8991]
+ [-0.1147  0.2242  7.2435]
+ [-0.797   0.8795  3.8762]
+ [-1.0625  0.6366  2.4707]
+ [ 0.5307  0.1285  5.6883]
+ [-1.22    0.7777  1.7252]
+ [ 0.3957  0.1076  5.6623]
+ [-0.1013  0.5989  7.1812]
+ [ 2.4482  0.9455 11.2095]
+ [ 2.0149  0.6192 10.9263]
+ [ 0.2012  0.2611  5.4631]]
+[INFO] Labels of training dataset: 
+[[-1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [ 1.]]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="94">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a Perceptron</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Creating a Perceptron...'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>number_of_epochs <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>perceptron1 <span class="op">=</span> Perceptron(num_features<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span>number_of_epochs)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Creating a Perceptron...
+[INFO]  Random initial weights: [0.17736342 0.15638614 0.47744044 0.1209934 ]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="95">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the perceptron 1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about training dataset...'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Training dataset size = </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Labels size = </span><span class="sc">{</span>labels<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Limit of epochs: </span><span class="sc">{</span>number_of_epochs<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Training the Perceptron 1...'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>perceptron1.train(training_data, labels)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>initialWeights <span class="op">=</span> perceptron1.getInitialWeights()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>finalWeights <span class="op">=</span> perceptron1.getFinalWeights()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\t</span><span class="ss">[INFO] OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Getting information about training dataset...
+[INFO]  Training dataset size = 30
+[INFO]  Labels size = 30
+[INFO]  Limit of epochs: 10000
+
+[INFO] Training the Perceptron 1...
+[INFO]  Converged after: 333 epochs.
+[INFO]  Final weights: [ 2.93736342  1.41135414  2.43657844 -0.7023866 ]
+[INFO]  Total of epochs: 333
+    [INFO] OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="96">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a new Perceptron</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Creating a new Perceptron...'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>number_of_epochs <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>perceptron2 <span class="op">=</span> Perceptron(num_features<span class="op">=</span><span class="dv">3</span>, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span>number_of_epochs)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Creating a new Perceptron...
+[INFO]  Random initial weights: [0.44467875 0.60329962 0.69505087 0.33930767]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="97">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the perceptron 2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about training dataset...'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Training dataset size = </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Labels size = </span><span class="sc">{</span>labels<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Limit of epochs: </span><span class="sc">{</span>number_of_epochs<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Training the Perceptron 2...'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>perceptron2.train(training_data, labels)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\t</span><span class="ss">[INFO] OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Getting information about training dataset...
+[INFO]  Training dataset size = 30
+[INFO]  Labels size = 30
+[INFO]  Limit of epochs: 10000
+
+[INFO] Training the Perceptron 2...
+[INFO]  Converged after: 386 epochs.
+[INFO]  Final weights: [ 3.06467875  1.55732162  2.47131887 -0.73088233]
+[INFO]  Total of epochs: 386
+    [INFO] OK!</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Registre os resultados dos dois treinamentos na tabela a seguir:</li>
+</ol>
+Tabela 1 - Resultados dos treinamentos (<strong>tab_treinamento1.dat</strong>):
+
+<table border="1">
+<tbody><tr>
+<td rowspan="2">
+Treinamento
+</td>
+<td colspan="4">
+Vetor de Pesos Inicial
+</td>
+<td colspan="4">
+Vetor de Pesos Final
+</td>
+<td rowspan="2">
+Número de Épocas
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+w1
+</td>
+<td>
+w2
+</td>
+<td>
+w3
+</td>
+<td>
+b
+</td>
+<td>
+w1
+</td>
+<td>
+w2
+</td>
+<td>
+w3
+</td>
+</tr>
+<tr>
+<td>
+1º (T1)
+</td>
+<td>
+0.1773634
+</td>
+<td>
+0.15638614
+</td>
+<td>
+0.47744044
+</td>
+<td>
+0.1209934
+</td>
+<td>
+2.93736342
+</td>
+<td>
+1.41135414
+</td>
+<td>
+2.43657844
+</td>
+<td>
+-0.7023866
+</td>
+<td>
+333
+</td>
+</tr>
+<tr>
+<td>
+2º (T1)
+</td>
+<td>
+0.44467875
+</td>
+<td>
+0.15638614
+</td>
+<td>
+0.69505087
+</td>
+<td>
+0.33930767
+</td>
+<td>
+3.06467875
+</td>
+<td>
+1.55732162
+</td>
+<td>
+2.47131887
+</td>
+<td>
+-0.73088233
+</td>
+<td>
+386
+</td>
+</tr>
+
+</tbody></table>
+<p><em>Nota: os valores atuais dessa tabela se referem ao últimos treinamentos realizados. Caso os trechos de código acima sejam executados novamente, necessita-se atualizar a tabela.</em></p>
+<ol start="3" type="a">
+<li>Após o treinamento do perceptron, aplique-o na classificação automática de novas amostras de óleo (ver arquivo tab_teste1.dat), indicando-se na tabela seguinte os resultados das saídas (Classes) referentes aos dois processos de treinamento realizados no item a.</li>
+</ol>
+<div class="cell" data-execution_count="98">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing dataset</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># test_data = np.array([[0.6508, 0.1097, 4.0009], [-1.4492, 0.8896, 4.4005], [2.085, 0.6876, 1.2071], [0.2626, 1.1476, 7.7985], [0.6418, 1.0234, 7.0427], [0.2569, 0.673, 8.3265], [1.1155, 0.6043, 7.4446], [0.0914, 0.3399, 7.0677], [0.0121, 0.5256, 4.6316], [-0.0429, 0.466, 5.4323], [0.434, 0.687, 8.2287], [0.2735, 1.0287, 7.1934], [0.4839, 0.4851, 7.485], [0.4089, -0.1267, 5.5019], [1.4391, 0.1614, 8.5843], [-0.9115,  -0.1973, 2.1962], [0.3654, 1.0475, 7.4858], [0.2144, 0.7515, 7.1699], [0.2013, 1.0014, 6.5489], [0.6483, 0.2183, 5.8991], [-0.1147, 0.2242, 7.2435], [-0.797, 0.8795, 3.8762], [-1.0625, 0.6366, 2.4707], [0.5307, 0.1285, 5.6883], [-1.22, 0.7777, 1.7252], [0.3957, 0.1076, 5.6623], [-0.1013, 0.5989, 7.1812], [2.4482, 0.9455, 11.2095], [2.0149, 0.6192, 10.9263], [0.2012, 0.2611, 5.4631]])</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing the perceptron</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Loading testing dataset...'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">'tab_teste1.dat'</span>, <span class="st">'r'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> line.split()</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> np.array(columns, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    results.append(columns[:])</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>testing_data <span class="op">=</span> np.array(results)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\t</span><span class="ss">[INFO] OK!'</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about testing dataset...'</span>) </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] Testing dataset: </span><span class="ch">\n</span><span class="sc">{</span>testing_data<span class="sc">}</span><span class="ss">'</span>)   </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f'[INFO] \tTesting dataset size = {training_data.shape[0]}')</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Testing dataset size = </span><span class="sc">{</span>testing_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Loading testing dataset...
+    [INFO] OK!
+
+[INFO] Getting information about testing dataset...
+[INFO] Testing dataset: 
+[[-0.3565  0.062   5.9891]
+ [-0.7842  1.1267  5.5912]
+ [ 0.3012  0.5611  5.8234]
+ [ 0.7757  1.0648  8.0677]
+ [ 0.157   0.8028  6.304 ]
+ [-0.7014  1.0316  3.6005]
+ [ 0.3748  0.1536  6.1537]
+ [-0.692   0.9404  4.4058]
+ [-1.397   0.7141  4.9263]
+ [-1.8842 -0.2805  1.2548]]
+[INFO]  Testing dataset size = 10</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="99">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Running testing data with Perceptron 1...'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for inputs in training_data:</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> inputs <span class="kw">in</span> testing_data:</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> perceptron1.predict(inputs)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"[INFO] </span><span class="ch">\t</span><span class="ss">Input: </span><span class="sc">{</span>inputs<span class="sc">}</span><span class="ss"> -&gt; Output: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Running testing data with Perceptron 1...
+[INFO]  Input: [-0.3565  0.062   5.9891] -&gt; Output: -1
+[INFO]  Input: [-0.7842  1.1267  5.5912] -&gt; Output: 1
+[INFO]  Input: [0.3012 0.5611 5.8234] -&gt; Output: 1
+[INFO]  Input: [0.7757 1.0648 8.0677] -&gt; Output: 1
+[INFO]  Input: [0.157  0.8028 6.304 ] -&gt; Output: 1
+[INFO]  Input: [-0.7014  1.0316  3.6005] -&gt; Output: 1
+[INFO]  Input: [0.3748 0.1536 6.1537] -&gt; Output: -1
+[INFO]  Input: [-0.692   0.9404  4.4058] -&gt; Output: 1
+[INFO]  Input: [-1.397   0.7141  4.9263] -&gt; Output: -1
+[INFO]  Input: [-1.8842 -0.2805  1.2548] -&gt; Output: -1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="100">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Running testing data with Perceptron 2...'</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for inputs in training_data:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> inputs <span class="kw">in</span> testing_data:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> perceptron2.predict(inputs)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"[INFO] </span><span class="ch">\t</span><span class="ss">Input: </span><span class="sc">{</span>inputs<span class="sc">}</span><span class="ss"> -&gt; Output: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Running testing data with Perceptron 2...
+[INFO]  Input: [-0.3565  0.062   5.9891] -&gt; Output: -1
+[INFO]  Input: [-0.7842  1.1267  5.5912] -&gt; Output: 1
+[INFO]  Input: [0.3012 0.5611 5.8234] -&gt; Output: 1
+[INFO]  Input: [0.7757 1.0648 8.0677] -&gt; Output: 1
+[INFO]  Input: [0.157  0.8028 6.304 ] -&gt; Output: 1
+[INFO]  Input: [-0.7014  1.0316  3.6005] -&gt; Output: 1
+[INFO]  Input: [0.3748 0.1536 6.1537] -&gt; Output: -1
+[INFO]  Input: [-0.692   0.9404  4.4058] -&gt; Output: 1
+[INFO]  Input: [-1.397   0.7141  4.9263] -&gt; Output: -1
+[INFO]  Input: [-1.8842 -0.2805  1.2548] -&gt; Output: -1</code></pre>
+</div>
+</div>
+<p>Tabela 2 - Resultados com as saídas das saída (classes) para os dados de teste (<strong>tab_teste1.dat</strong>):</p>
+
+<table border="1">
+<tbody><tr>
+<td>
+Amostra
+</td>
+<td>
+x1
+</td>
+<td>
+x2
+</td>
+<td>
+x3
+</td>
+<td>
+y (T1)
+</td>
+<td>
+y (T2)
+</td>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+-0.3565
+</td>
+<td>
+0.0620
+</td>
+<td>
+5.9891
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+-0.7842
+</td>
+<td>
+1.1267
+</td>
+<td>
+5.5912
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+0.3012
+</td>
+<td>
+0.5611
+</td>
+<td>
+5.8234
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+0.7757
+</td>
+<td>
+1.0648
+</td>
+<td>
+8.0677
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+0.157
+</td>
+<td>
+0.8028
+</td>
+<td>
+6.304
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+-0.7014
+</td>
+<td>
+1.0316
+</td>
+<td>
+3.6005
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+0.3748
+</td>
+<td>
+0.1536
+</td>
+<td>
+6.1537
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+-0.692
+</td>
+<td>
+0.9404
+</td>
+<td>
+4.4058
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+-1.397
+</td>
+<td>
+0.7141
+</td>
+<td>
+4.9263
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+-1.8842
+</td>
+<td>
+-0.2805
+</td>
+<td>
+1.2548
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+
+</tbody></table>
+<p><em>Nota: os valores atuais dessa tabela se referem ao últimos testes realizados. Caso os trechos de código acima sejam executados novamente, necessita-se atualizar a tabela.</em></p>
+<ol start="4" type="a">
+<li>Explique por que o número de épocas de treinamento varia a cada vez que se executa o treinamento do perceptron.</li>
+</ol>
+<p><em>O número de épocas necessárias para a convergência do processo de treinamento varia conforme os valores iniciais dos pesos e do limiar de ativação. Esses valores iniciais definem quão longe da fronteira de seperação o treinamento inicia o ajuste do modelo. Se os valores iniciais atribuídos aos pesos e ao limiar de ativação são definidos aleatoriamente, a cada execução do treinamento, o número de épocas para a convergência normalmente é diferente.</em></p>
+<ol start="5" type="a">
+<li>Qual é a principal limitação do perceptron quando aplicado em problemas de classificação de padrões?</li>
+</ol>
+<p><em>Os perceptrons são um tipo de rede neurais apropriada para tarefa de classificação de padrões em que as classes são linearmente separáveis. Por isso, para problemas não linearmente separáveis utilizando perceptrons, é necessário especificar um número máximo de épocas de treinamento.</em></p>
+<ol start="4" type="1">
+<li>Um sistema de gerenciamento automático de controle de duas válvulas, situado a 500 metros de um processo industrial, envia um sinal codificado constituído de quatro grandezas {x1, x2, x3 e x4} que são necessárias para o ajuste de cada uma das válvulas. Conforme mostra a figura abaixo, a mesma via de comunicação é utilizada para acionamento de ambas as válvulas, sendo que o comutador localizado próximo das válvulas deve decidir se o sinal é para a válvula A ou B. Porém, durante a transmissão, os sinais sofrem interferências que alteram o conteúdo das informações transmitidas. Para resolver este problema, treinar-se-á uma rede ADALINE para classificar os sinais ruidosos, que informará ao sistema comutador se os dados devem ser encaminhados para o comando de ajuste da válvula A ou B. Assim, baseado nas medições dos sinais já com ruídos, formou-se o conjunto de treinamento em anexo2, tomando por convenção o valor –1 para os sinais que devem ser encaminhados para o ajuste da válvula A e o valor +1 se os mesmos devem ser enviados para a válvula B.</li>
+</ol>
+<p>Daí, pede-se:</p>
+<ol type="a">
+<li>Execute 2 treinamentos para a rede ADALINE inicializando o vetor de pesos em cada treinamento com valores aleatórios entre zero e um de tal forma que os elementos do vetor de pesos iniciais não sejam os mesmos.</li>
+</ol>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Adaline:</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, num_features, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span><span class="dv">100</span>, epsilon<span class="op">=</span><span class="fl">1e-5</span>):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.num_features <span class="op">=</span> num_features</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.learning_rate <span class="op">=</span> learning_rate</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.epochs <span class="op">=</span> epochs</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.epsilon <span class="op">=</span> epsilon</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weights <span class="op">=</span> np.random.rand(num_features <span class="op">+</span> <span class="dv">1</span>)  <span class="co"># initial random weights +1 for the bias term</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Random initial weights: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>weights<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, inputs): <span class="co"># activation function</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        activation <span class="op">=</span> np.dot(inputs, <span class="va">self</span>.weights[<span class="dv">1</span>:]) <span class="op">+</span> <span class="va">self</span>.weights[<span class="dv">0</span>] <span class="co"># activation potential: u</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="cf">if</span> activation <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="op">-</span><span class="dv">1</span>  <span class="co"># Use of the bipolar step function</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> train(<span class="va">self</span>, training_data, targets):</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        mse <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.epochs):</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>            total_error <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(f'[INFO] Epoch: {epoch}')</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> inputs, target <span class="kw">in</span> <span class="bu">zip</span>(training_data, targets):</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>                activation <span class="op">=</span> <span class="va">self</span>.predict(inputs) <span class="co"># return of activation function: y</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                error <span class="op">=</span> target <span class="op">-</span> activation</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[<span class="dv">1</span>:] <span class="op">+=</span> <span class="va">self</span>.learning_rate <span class="op">*</span> error <span class="op">*</span> inputs</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[<span class="dv">0</span>] <span class="op">+=</span> <span class="va">self</span>.learning_rate <span class="op">*</span> error</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                total_error <span class="op">+=</span> error <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>            mse <span class="op">=</span> total_error <span class="op">/</span> <span class="bu">len</span>(targets)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> mse <span class="op">&lt;</span> <span class="va">self</span>.epsilon:</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Converged after: </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> epochs.'</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Final weights: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>weights<span class="sc">}</span><span class="ss">'</span>) </span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Total of epochs: </span><span class="sc">{</span>epoch <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Mean square error: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] ###### Adaline Implementation #######'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Loading training dataset and targets...'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">'tab_treinamento2.dat'</span>, <span class="st">'r'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> line.split()</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> np.array(columns, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    results.append(columns[:<span class="dv">4</span>])</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    t.append(columns[<span class="op">-</span><span class="dv">1</span>:])</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>training_data <span class="op">=</span> np.array(results)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> np.array(t)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#training_data = np.array([[4.3290000e-01, -1.3719000e+00, 7.0220000e-01, -8.5350000e-01],[3.0240000e-01, 2.2860000e-01, 8.6300000e-01, 2.7909000e+00],[1.3490000e-01, -6.4450000e-01, 1.0530000e+00, 5.6870000e-01],[3.3740000e-01, -1.7163000e+00, 3.6700000e-01, -6.2830000e-01],[1.1434000e+00, -4.8500000e-02, 6.6370000e-01, 1.2606000e+00],[1.3749000e+00, -5.0710000e-01, 4.4640000e-01, 1.3009000e+00],[7.2210000e-01, -7.5870000e-01, 7.6810000e-01, -5.5920000e-01],[4.4030000e-01, -8.0720000e-01, 5.1540000e-01, -3.1290000e-01],[-5.2310000e-01, 3.5480000e-01, 2.5380000e-01, 1.5776000e+00],[3.2550000e-01, -2.0000000e+00, 7.1120000e-01  -1.1209000e+00],[5.8240000e-01, 1.3915000e+00, -2.2910000e-01, 4.1735000e+00],[1.3400000e-01, 6.0810000e-01, 4.4500000e-01, 3.2230000e+00],[1.4800000e-01, -2.9880000e-01, 4.7780000e-01, 8.6490000e-01],[7.3590000e-01, 1.8690000e-01, -8.7200000e-02, 2.3584000e+00],[7.1150000e-01, -1.1469000e+00, 3.3940000e-01, 9.5730000e-01],[8.2510000e-01, -1.2840000e+00, 8.4520000e-01, 1.2382000e+00],[1.5690000e-01, 3.7120000e-01, 8.8250000e-01, 1.7633000e+00],[3.3000000e-03, 6.8350000e-01, 5.3890000e-01, 2.8249000e+00],[4.2430000e-01, 8.3130000e-01, 2.6340000e-01, 3.5855000e+00],[1.0490000e+00, 1.3260000e-01, 9.1380000e-01, 1.9792000e+00],[1.4276000e+00, 5.3310000e-01, -1.4500000e-02, 3.7286000e+00],[5.9710000e-01, 1.4865000e+00, 2.9040000e-01, 4.6069000e+00],[8.4750000e-01, 2.1479000e+00, 3.1790000e-01, 5.8235000e+00],[1.3967000e+00, -4.1710000e-01, 6.4430000e-01, 1.3927000e+00],[4.4000000e-03, 1.5378000e+00, 6.0990000e-01, 4.7755000e+00],[2.2010000e-01, -5.6680000e-01, 5.1500000e-02, 7.8290000e-01],[6.3000000e-01, -1.2480000e+00, 8.5910000e-01, 8.0930000e-01],[-2.4790000e-01, 8.9600000e-01, 5.4700000e-02, 1.7381000e+00],[-3.0880000e-01, -9.2900000e-02, 8.6590000e-01, 1.5483000e+00],[-5.1800000e-01, 1.4974000e+00, 5.4530000e-01, 2.3993000e+00],[6.8330000e-01, 8.2660000e-01, 8.2900000e-02, 2.8864000e+00],[4.3530000e-01, -1.4066000e+00, 4.2070000e-01, -4.8790000e-01],[-1.0690000e-01, -3.2329000e+00, 1.8560000e-01, -2.4572000e+00],[4.6620000e-01, 6.2610000e-01, 7.3040000e-01, 3.4370000e+00], [8.2980000e-01, -1.4089000e+00, 3.1190000e-01, 1.3235000e+00]])</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># targets = np.array([1.0000000e+00, -1.0000000e+00, -1.0000000e+00, -1.0000000e+00, 1.0000000e+00, 1.0000000e+00, 1.0000000e+00, 1.0000000e+00, -1.0000000e+00, 1.0000000e+00, -1.0000000e+00, -1.0000000e+00, 1.0000000e+00, 1.0000000e+00, -1.0000000e+00, -1.0000000e+00, 1.0000000e+00, -1.0000000e+00, -1.0000000e+00, 1.0000000e+00, 1.0000000e+00, -1.0000000e+00, -1.0000000e+00, 1.0000000e+00, -1.0000000e+00, 1.0000000e+00, -1.0000000e+00, 1.0000000e+00, -1.0000000e+00, 1.0000000e+00, 1.0000000e+00, 1.0000000e+00, -1.0000000e+00, -1.0000000e+00, -1.0000000e+00])</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Training dataset: </span><span class="ch">\n</span><span class="sc">{</span>training_data<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Targets of training dataset: </span><span class="ch">\n</span><span class="sc">{</span>targets<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] ###### Adaline Implementation #######
+
+[INFO] Loading training dataset and targets...
+[INFO]  OK!
+[INFO]  Training dataset: 
+[[ 4.3290e-01 -1.3719e+00  7.0220e-01 -8.5350e-01]
+ [ 3.0240e-01  2.2860e-01  8.6300e-01  2.7909e+00]
+ [ 1.3490e-01 -6.4450e-01  1.0530e+00  5.6870e-01]
+ [ 3.3740e-01 -1.7163e+00  3.6700e-01 -6.2830e-01]
+ [ 1.1434e+00 -4.8500e-02  6.6370e-01  1.2606e+00]
+ [ 1.3749e+00 -5.0710e-01  4.4640e-01  1.3009e+00]
+ [ 7.2210e-01 -7.5870e-01  7.6810e-01 -5.5920e-01]
+ [ 4.4030e-01 -8.0720e-01  5.1540e-01 -3.1290e-01]
+ [-5.2310e-01  3.5480e-01  2.5380e-01  1.5776e+00]
+ [ 3.2550e-01 -2.0000e+00  7.1120e-01 -1.1209e+00]
+ [ 5.8240e-01  1.3915e+00 -2.2910e-01  4.1735e+00]
+ [ 1.3400e-01  6.0810e-01  4.4500e-01  3.2230e+00]
+ [ 1.4800e-01 -2.9880e-01  4.7780e-01  8.6490e-01]
+ [ 7.3590e-01  1.8690e-01 -8.7200e-02  2.3584e+00]
+ [ 7.1150e-01 -1.1469e+00  3.3940e-01  9.5730e-01]
+ [ 8.2510e-01 -1.2840e+00  8.4520e-01  1.2382e+00]
+ [ 1.5690e-01  3.7120e-01  8.8250e-01  1.7633e+00]
+ [ 3.3000e-03  6.8350e-01  5.3890e-01  2.8249e+00]
+ [ 4.2430e-01  8.3130e-01  2.6340e-01  3.5855e+00]
+ [ 1.0490e+00  1.3260e-01  9.1380e-01  1.9792e+00]
+ [ 1.4276e+00  5.3310e-01 -1.4500e-02  3.7286e+00]
+ [ 5.9710e-01  1.4865e+00  2.9040e-01  4.6069e+00]
+ [ 8.4750e-01  2.1479e+00  3.1790e-01  5.8235e+00]
+ [ 1.3967e+00 -4.1710e-01  6.4430e-01  1.3927e+00]
+ [ 4.4000e-03  1.5378e+00  6.0990e-01  4.7755e+00]
+ [ 2.2010e-01 -5.6680e-01  5.1500e-02  7.8290e-01]
+ [ 6.3000e-01 -1.2480e+00  8.5910e-01  8.0930e-01]
+ [-2.4790e-01  8.9600e-01  5.4700e-02  1.7381e+00]
+ [-3.0880e-01 -9.2900e-02  8.6590e-01  1.5483e+00]
+ [-5.1800e-01  1.4974e+00  5.4530e-01  2.3993e+00]
+ [ 6.8330e-01  8.2660e-01  8.2900e-02  2.8864e+00]
+ [ 4.3530e-01 -1.4066e+00  4.2070e-01 -4.8790e-01]
+ [-1.0690e-01 -3.2329e+00  1.8560e-01 -2.4572e+00]
+ [ 4.6620e-01  6.2610e-01  7.3040e-01  3.4370e+00]
+ [ 8.2980e-01 -1.4089e+00  3.1190e-01  1.3235e+00]]
+[INFO]  Targets of training dataset: 
+[[ 1.]
+ [-1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [-1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [-1.]
+ [-1.]
+ [-1.]]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an Adaline</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Creating an Adaline...'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>number_of_epochs <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>adaline1 <span class="op">=</span> Adaline(num_features<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span>number_of_epochs, epsilon<span class="op">=</span>epsilon)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Creating an Adaline...
+[INFO]  Random initial weights: [0.85687093 0.02633478 0.96817149 0.24457783 0.34848885]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the Adaline</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about training dataset...'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Training dataset size = </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Labels size = </span><span class="sc">{</span>targets<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>targets<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Limit of epochs: </span><span class="sc">{</span>number_of_epochs<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Epsilon: </span><span class="sc">{</span>epsilon<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Training the Adaline 1...'</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>adaline1.train(training_data, targets)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Getting information about training dataset...
+[INFO]  Training dataset size = 35 4
+[INFO]  Labels size = 35 1
+[INFO]  Limit of epochs: 10000
+[INFO]  Epsilon: 1e-05
+
+[INFO] Training the Adaline 1...
+[INFO]  Converged after: 39 epochs.
+[INFO]  Final weights: [ 0.61687093  0.54973078  0.61733949 -0.08346417 -0.44539315]
+[INFO]  Total of epochs: 39
+[INFO]  Mean square error: [0.]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an Adaline</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Creating an new Adaline...'</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>number_of_epochs <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>adaline2 <span class="op">=</span> Adaline(num_features<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.01</span>, epochs<span class="op">=</span>number_of_epochs, epsilon<span class="op">=</span>epsilon)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Creating an new Adaline...
+[INFO]  Random initial weights: [0.73993445 0.71783308 0.88046206 0.71642348 0.55246439]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the Adaline</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about training dataset...'</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Training dataset size = </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>training_data<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Labels size = </span><span class="sc">{</span>targets<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>targets<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Limit of epochs: </span><span class="sc">{</span>number_of_epochs<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Epsilon: </span><span class="sc">{</span>epsilon<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Training the Adaline 2...'</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>adaline2.train(training_data, targets)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">OK!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Getting information about training dataset...
+[INFO]  Training dataset size = 35 4
+[INFO]  Labels size = 35 1
+[INFO]  Limit of epochs: 10000
+[INFO]  Epsilon: 1e-05
+
+[INFO] Training the Adaline 2...
+[INFO]  Converged after: 62 epochs.
+[INFO]  Final weights: [ 0.63993445  0.64771308  0.67042606 -0.07245452 -0.49953761]
+[INFO]  Total of epochs: 62
+[INFO]  Mean square error: [0.]
+[INFO]  OK!</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Registre os resultados dos dois treinamentos na tabela a seguir:</li>
+</ol>
+Tabela 3 - Resultados dos treinamentos (<strong>tab_treinamento2.dat</strong>):
+
+<table border="1">
+<tbody><tr>
+<td rowspan="2">
+Treinamento
+</td>
+<td colspan="5">
+Vetor de Pesos Inicial
+</td>
+<td colspan="5">
+Vetor de Pesos Final
+</td>
+<td rowspan="2">
+Número de Épocas
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+w1
+</td>
+<td>
+w2
+</td>
+<td>
+w3
+</td>
+<td>
+w4
+</td>
+<td>
+b
+</td>
+<td>
+w1
+</td>
+<td>
+w2
+</td>
+<td>
+w3
+</td>
+<td>
+w4
+</td>
+</tr>
+<tr>
+<td>
+1º (T1)
+</td>
+<td>
+0.85687093
+</td>
+<td>
+0.02633478
+</td>
+<td>
+0.96817149
+</td>
+<td>
+0.24457783
+</td>
+<td>
+0.34848885
+</td>
+<td>
+0.61687093
+</td>
+<td>
+0.54973078
+</td>
+<td>
+0.61733949
+</td>
+<td>
+-0.08346417
+</td>
+<td>
+-0.44539315
+</td>
+<td>
+39
+</td>
+</tr>
+<tr>
+<td>
+2º (T1)
+</td>
+<td>
+0.73993445
+</td>
+<td>
+0.71783308
+</td>
+<td>
+0.88046206
+</td>
+<td>
+0.71642348
+</td>
+<td>
+0.55246439
+</td>
+<td>
+0.63993445
+</td>
+<td>
+0.64771308
+</td>
+<td>
+0.67042606
+</td>
+<td>
+-0.07245452
+</td>
+<td>
+-0.49953761
+</td>
+<td>
+62
+</td>
+</tr>
+
+</tbody></table>
+<p><em>Nota: os valores atuais dessa tabela se referem ao últimos treinamentos realizados. Caso os trechos de código acima sejam executados novamente, necessita-se atualizar a tabela.</em></p>
+<ol start="3" type="a">
+<li>Para os treinamentos realizados, aplique então a rede ADALINE para classificar e informar ao comutador se os sinais seguintes devem ser encaminhados para a válvula A ou B (ver tab_teste2.dat).</li>
+</ol>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Testing the adaline</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Loading testing dataset...'</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">'tab_teste2.dat'</span>, <span class="st">'r'</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> line.split()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> np.array(columns, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    results.append(columns[:])</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>testing_data <span class="op">=</span> np.array(results)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\t</span><span class="ss">[INFO] OK!'</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Getting information about testing dataset...'</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f'[INFO] Testing dataset size = {training_data.shape[0]}')</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'[INFO] </span><span class="ch">\t</span><span class="ss">Testing dataset size = </span><span class="sc">{</span>testing_data<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Loading testing dataset...
+    [INFO] OK!
+
+[INFO] Getting information about testing dataset...
+[INFO]  Testing dataset size = 15</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Running testing data with Adaline 1...'</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for inputs in training_data:</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> inputs <span class="kw">in</span> testing_data:</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> adaline1.predict(inputs)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"[INFO] </span><span class="ch">\t</span><span class="ss">Input: </span><span class="sc">{</span>inputs<span class="sc">}</span><span class="ss"> -&gt; Output: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Running testing data with Adaline 1...
+[INFO]  Input: [0.9694 0.6909 0.4334 3.4965] -&gt; Output: -1
+[INFO]  Input: [0.5427 1.3832 0.639  4.0352] -&gt; Output: -1
+[INFO]  Input: [ 0.6081 -0.9196  0.5925  0.1016] -&gt; Output: 1
+[INFO]  Input: [-0.1618  0.4694  0.203   3.0117] -&gt; Output: -1
+[INFO]  Input: [ 0.187  -0.2578  0.6124  1.7749] -&gt; Output: -1
+[INFO]  Input: [ 0.4891 -0.5276  0.4378  0.6439] -&gt; Output: 1
+[INFO]  Input: [0.3777 2.0149 0.7423 3.3932] -&gt; Output: 1
+[INFO]  Input: [ 1.1498 -0.4067  0.2469  1.5866] -&gt; Output: 1
+[INFO]  Input: [0.9325 1.095  1.0359 3.3591] -&gt; Output: 1
+[INFO]  Input: [0.506  1.3317 0.9222 3.7174] -&gt; Output: -1
+[INFO]  Input: [ 0.0497 -2.0656  0.6124 -0.6585] -&gt; Output: -1
+[INFO]  Input: [0.4004 3.5369 0.9766 5.3532] -&gt; Output: 1
+[INFO]  Input: [-0.1874  1.3343  0.5374  3.2189] -&gt; Output: -1
+[INFO]  Input: [0.506  1.3317 0.9222 3.7174] -&gt; Output: -1
+[INFO]  Input: [ 1.6375 -0.7911  0.7537  0.5515] -&gt; Output: 1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">[INFO] Running testing data with Adaline 2...'</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for inputs in training_data:</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> inputs <span class="kw">in</span> testing_data:</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> adaline2.predict(inputs)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"[INFO] </span><span class="ch">\t</span><span class="ss">Input: </span><span class="sc">{</span>inputs<span class="sc">}</span><span class="ss"> -&gt; Output: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[INFO] Running testing data with Adaline 2...
+[INFO]  Input: [0.9694 0.6909 0.4334 3.4965] -&gt; Output: -1
+[INFO]  Input: [0.5427 1.3832 0.639  4.0352] -&gt; Output: -1
+[INFO]  Input: [ 0.6081 -0.9196  0.5925  0.1016] -&gt; Output: 1
+[INFO]  Input: [-0.1618  0.4694  0.203   3.0117] -&gt; Output: -1
+[INFO]  Input: [ 0.187  -0.2578  0.6124  1.7749] -&gt; Output: -1
+[INFO]  Input: [ 0.4891 -0.5276  0.4378  0.6439] -&gt; Output: 1
+[INFO]  Input: [0.3777 2.0149 0.7423 3.3932] -&gt; Output: 1
+[INFO]  Input: [ 1.1498 -0.4067  0.2469  1.5866] -&gt; Output: 1
+[INFO]  Input: [0.9325 1.095  1.0359 3.3591] -&gt; Output: 1
+[INFO]  Input: [0.506  1.3317 0.9222 3.7174] -&gt; Output: -1
+[INFO]  Input: [ 0.0497 -2.0656  0.6124 -0.6585] -&gt; Output: -1
+[INFO]  Input: [0.4004 3.5369 0.9766 5.3532] -&gt; Output: 1
+[INFO]  Input: [-0.1874  1.3343  0.5374  3.2189] -&gt; Output: -1
+[INFO]  Input: [0.506  1.3317 0.9222 3.7174] -&gt; Output: -1
+[INFO]  Input: [ 1.6375 -0.7911  0.7537  0.5515] -&gt; Output: 1</code></pre>
+</div>
+</div>
+<p>Tabela 4 - Resultados com as saídas das saída (classes) para os dados de teste (<strong>tab_teste2.dat</strong>):</p>
+
+<table border="1">
+<tbody><tr>
+<td>
+Amostra
+</td>
+<td>
+x1
+</td>
+<td>
+x2
+</td>
+<td>
+x3
+</td>
+<td>
+x4
+</td>
+<td>
+y (T1)
+</td>
+<td>
+y (T2)
+</td>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+0.9694
+</td>
+<td>
+0.6909
+</td>
+<td>
+0.4334
+</td>
+<td>
+3.4965
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+0.5427
+</td>
+<td>
+1.3832
+</td>
+<td>
+0.639
+</td>
+<td>
+4.0352
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+0.6081
+</td>
+<td>
+-0.9196
+</td>
+<td>
+0.5925
+</td>
+<td>
+0.1016
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+-0.1618
+</td>
+<td>
+0.4694
+</td>
+<td>
+0.203
+</td>
+<td>
+3.0117
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+0.187
+</td>
+<td>
+-0.2578
+</td>
+<td>
+0.6124
+</td>
+<td>
+1.7749
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+0.4891
+</td>
+<td>
+-0.5276
+</td>
+<td>
+0.4378
+</td>
+<td>
+0.6439
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+0.3777
+</td>
+<td>
+2.0149
+</td>
+<td>
+0.7423
+</td>
+<td>
+3.3932
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+1.1498
+</td>
+<td>
+-0.4067
+</td>
+<td>
+0.2469
+</td>
+<td>
+1.5866
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+0.9325
+</td>
+<td>
+1.095
+</td>
+<td>
+1.0359
+</td>
+<td>
+3.3591
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+0.506
+</td>
+<td>
+1.3317
+</td>
+<td>
+0.9222
+</td>
+<td>
+3.7174
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+11
+</td>
+<td>
+0.0497
+</td>
+<td>
+-2.0656
+</td>
+<td>
+0.6124
+</td>
+<td>
+-0.6585
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+12
+</td>
+<td>
+0.4004
+</td>
+<td>
+3.5369
+</td>
+<td>
+0.9766
+</td>
+<td>
+5.3532
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+13
+</td>
+<td>
+-0.1874
+</td>
+<td>
+1.3343
+</td>
+<td>
+0.5374
+</td>
+<td>
+3.2189
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+14
+</td>
+<td>
+0.506
+</td>
+<td>
+1.3317
+</td>
+<td>
+0.9222
+</td>
+<td>
+3.7174
+</td>
+<td>
+-1
+</td>
+<td>
+-1
+</td>
+</tr>
+<tr>
+<td>
+15
+</td>
+<td>
+1.6375
+</td>
+<td>
+-0.7911
+</td>
+<td>
+0.7537
+</td>
+<td>
+0.5515
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+
+</tbody></table>
+<p><em>Nota: os valores atuais dessa tabela se referem ao últimos testes realizados. Caso os trechos de código acima sejam executados novamente, necessita-se atualizar a tabela.</em></p>
+<ol start="5" type="1">
+<li>Um(a) estudante da disciplina de Redes Neurais e Aprendizado Profundo ficou empolgado(a) com o trabalho do Fisher sobre as flores Íris e resolveu propor uma versão automatizada para ele. Essa nova versão deveria ter dois módulos principais: um módulo de visão computacional e um módulo do tipo classificador neural. Caso você(s) fosse(m) esse(a) estudante, como você(s) desenvolveria(m) esse sistema? Descreva-o em detalhes. Use ilustração(ões) para valorizar o seu pré-projeto. Lembre-se que são três tipos de Íris (Virginica, Versicolor e Setosa) e que 4 parâmetros foram medidos pelo Fisher para cada uma das flores (comprimento e largura da Pétala, Comprimento e largura da Sépala).</li>
+</ol>
+<p>Exemplo de código Python para implementar o sistema automatizado de classificação de flores Íris usando visão computacional e um classificador neural. Neste exemplo, usaremos a biblioteca TensorFlow para criar a rede neural. Certifique-se de ter o TensorFlow instalado em seu ambiente antes de executar o código. Você também precisará de outras bibliotecas como NumPy e scikit-learn. Você pode instalá-los usando o pip, se ainda não estiverem instalados:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install numpy scikit<span class="op">-</span>learn tensorflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, classification_report, roc_curve, auc</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Passo 1: Carregar e preparar o conjunto de dados</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> datasets.load_iris()</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> iris.data  <span class="co"># Parâmetros de entrada</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> iris.target  <span class="co"># Rótulos das classes</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividir o conjunto de dados em treinamento e teste</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Padronizar os dados (importante para redes neurais)</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualização dos dados - Gráfico de dispersão 2D</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[:, <span class="dv">0</span>], X_train[:, <span class="dv">1</span>], c<span class="op">=</span>y_train)</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Comprimento da Sépala'</span>)</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Largura da Sépala'</span>)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Visualização dos Dados Íris'</span>)</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Passo 2: Criar o modelo de rede neural</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential([</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>    tf.keras.layers.Input(shape<span class="op">=</span>(<span class="dv">4</span>,)),</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>    tf.keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>    tf.keras.layers.Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>    tf.keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Compilar o modelo</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>, loss<span class="op">=</span><span class="st">'sparse_categorical_crossentropy'</span>, metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Passo 3: Treinar o modelo</span></span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, y_train, epochs<span class="op">=</span><span class="dv">100</span>, batch_size<span class="op">=</span><span class="dv">16</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar a curva de aprendizado</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'accuracy'</span>])</span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Época'</span>)</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Acurácia'</span>)</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Curva de Aprendizado'</span>)</span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Avaliar o modelo no conjunto de teste</span></span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a>test_loss, test_accuracy <span class="op">=</span> model.evaluate(X_test, y_test, verbose<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Acurácia no conjunto de teste: </span><span class="sc">{</span>test_accuracy <span class="op">*</span> <span class="dv">100</span><span class="sc">:.2f}</span><span class="ss">%'</span>)</span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar uma previsão</span></span>
+<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> np.array([[<span class="fl">5.1</span>, <span class="fl">3.5</span>, <span class="fl">1.4</span>, <span class="fl">0.2</span>]])  <span class="co"># Exemplo de parâmetros de uma flor Íris</span></span>
+<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> scaler.transform(sample)  <span class="co"># Padronizar os dados</span></span>
+<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.argmax(model.predict(sample))</span>
+<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> [<span class="st">'Setosa'</span>, <span class="st">'Versicolor'</span>, <span class="st">'Virginica'</span>]</span>
+<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A flor pertence à classe: </span><span class="sc">{</span>classes[predicted_class]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de Confusão</span></span>
+<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a>y_pred_classes <span class="op">=</span> np.argmax(y_pred, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a>confusion_mtx <span class="op">=</span> confusion_matrix(y_test, y_pred_classes)</span>
+<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar a matriz de confusão</span></span>
+<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>plt.imshow(confusion_mtx, interpolation<span class="op">=</span><span class="st">'nearest'</span>, cmap<span class="op">=</span>plt.cm.Blues)</span>
+<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Matriz de Confusão'</span>)</span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a>tick_marks <span class="op">=</span> np.arange(<span class="bu">len</span>(classes))</span>
+<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a>plt.xticks(tick_marks, classes, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>plt.yticks(tick_marks, classes)</span>
+<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predito'</span>)</span>
+<span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Real'</span>)</span>
+<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Relatório de Classificação</span></span>
+<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred_classes, target_names<span class="op">=</span>classes))</span>
+<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-81"><a href="#cb36-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Curvas ROC</span></span>
+<span id="cb36-82"><a href="#cb36-82" aria-hidden="true" tabindex="-1"></a>fpr <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb36-83"><a href="#cb36-83" aria-hidden="true" tabindex="-1"></a>tpr <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb36-84"><a href="#cb36-84" aria-hidden="true" tabindex="-1"></a>roc_auc <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb36-85"><a href="#cb36-85" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(classes)):</span>
+<span id="cb36-86"><a href="#cb36-86" aria-hidden="true" tabindex="-1"></a>    fpr[i], tpr[i], _ <span class="op">=</span> roc_curve(y_test, y_pred[:, i], pos_label<span class="op">=</span>i)</span>
+<span id="cb36-87"><a href="#cb36-87" aria-hidden="true" tabindex="-1"></a>    roc_auc[i] <span class="op">=</span> auc(fpr[i], tpr[i])</span>
+<span id="cb36-88"><a href="#cb36-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-89"><a href="#cb36-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar as curvas ROC</span></span>
+<span id="cb36-90"><a href="#cb36-90" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb36-91"><a href="#cb36-91" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(classes)):</span>
+<span id="cb36-92"><a href="#cb36-92" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr[i], tpr[i], lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Classe </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> (AUC = </span><span class="sc">{</span>roc_auc[i]<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb36-93"><a href="#cb36-93" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'navy'</span>, lw<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb36-94"><a href="#cb36-94" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="fl">0.0</span>, <span class="fl">1.0</span>])</span>
+<span id="cb36-95"><a href="#cb36-95" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="fl">0.0</span>, <span class="fl">1.05</span>])</span>
+<span id="cb36-96"><a href="#cb36-96" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Taxa de Falso Positivo'</span>)</span>
+<span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Taxa de Verdadeiro Positivo'</span>)</span>
+<span id="cb36-98"><a href="#cb36-98" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Curvas ROC para as Classes'</span>)</span>
+<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb36-100"><a href="#cb36-100" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nn_dl_exercises_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1/100
+8/8 - 2s - loss: 1.0850 - accuracy: 0.2833 - 2s/epoch - 196ms/step
+Epoch 2/100
+8/8 - 0s - loss: 0.9450 - accuracy: 0.6583 - 15ms/epoch - 2ms/step
+Epoch 3/100
+8/8 - 0s - loss: 0.8243 - accuracy: 0.7917 - 16ms/epoch - 2ms/step
+Epoch 4/100
+8/8 - 0s - loss: 0.7219 - accuracy: 0.8083 - 13ms/epoch - 2ms/step
+Epoch 5/100
+8/8 - 0s - loss: 0.6329 - accuracy: 0.8083 - 14ms/epoch - 2ms/step
+Epoch 6/100
+8/8 - 0s - loss: 0.5588 - accuracy: 0.8167 - 12ms/epoch - 2ms/step
+Epoch 7/100
+8/8 - 0s - loss: 0.4987 - accuracy: 0.8167 - 22ms/epoch - 3ms/step
+Epoch 8/100
+8/8 - 0s - loss: 0.4504 - accuracy: 0.8333 - 21ms/epoch - 3ms/step
+Epoch 9/100
+8/8 - 0s - loss: 0.4110 - accuracy: 0.8417 - 15ms/epoch - 2ms/step
+Epoch 10/100
+8/8 - 0s - loss: 0.3779 - accuracy: 0.8500 - 16ms/epoch - 2ms/step
+Epoch 11/100
+8/8 - 0s - loss: 0.3523 - accuracy: 0.8500 - 18ms/epoch - 2ms/step
+Epoch 12/100
+8/8 - 0s - loss: 0.3287 - accuracy: 0.8750 - 18ms/epoch - 2ms/step
+Epoch 13/100
+8/8 - 0s - loss: 0.3086 - accuracy: 0.8833 - 17ms/epoch - 2ms/step
+Epoch 14/100
+8/8 - 0s - loss: 0.2901 - accuracy: 0.8833 - 19ms/epoch - 2ms/step
+Epoch 15/100
+8/8 - 0s - loss: 0.2740 - accuracy: 0.9000 - 14ms/epoch - 2ms/step
+Epoch 16/100
+8/8 - 0s - loss: 0.2564 - accuracy: 0.9167 - 17ms/epoch - 2ms/step
+Epoch 17/100
+8/8 - 0s - loss: 0.2449 - accuracy: 0.9333 - 24ms/epoch - 3ms/step
+Epoch 18/100
+8/8 - 0s - loss: 0.2311 - accuracy: 0.9333 - 17ms/epoch - 2ms/step
+Epoch 19/100
+8/8 - 0s - loss: 0.2190 - accuracy: 0.9500 - 14ms/epoch - 2ms/step
+Epoch 20/100
+8/8 - 0s - loss: 0.2087 - accuracy: 0.9500 - 20ms/epoch - 3ms/step
+Epoch 21/100
+8/8 - 0s - loss: 0.1969 - accuracy: 0.9583 - 19ms/epoch - 2ms/step
+Epoch 22/100
+8/8 - 0s - loss: 0.1879 - accuracy: 0.9667 - 16ms/epoch - 2ms/step
+Epoch 23/100
+8/8 - 0s - loss: 0.1767 - accuracy: 0.9667 - 14ms/epoch - 2ms/step
+Epoch 24/100
+8/8 - 0s - loss: 0.1678 - accuracy: 0.9667 - 20ms/epoch - 3ms/step
+Epoch 25/100
+8/8 - 0s - loss: 0.1593 - accuracy: 0.9667 - 36ms/epoch - 5ms/step
+Epoch 26/100
+8/8 - 0s - loss: 0.1515 - accuracy: 0.9667 - 22ms/epoch - 3ms/step
+Epoch 27/100
+8/8 - 0s - loss: 0.1442 - accuracy: 0.9667 - 17ms/epoch - 2ms/step
+Epoch 28/100
+8/8 - 0s - loss: 0.1371 - accuracy: 0.9667 - 16ms/epoch - 2ms/step
+Epoch 29/100
+8/8 - 0s - loss: 0.1314 - accuracy: 0.9667 - 27ms/epoch - 3ms/step
+Epoch 30/100
+8/8 - 0s - loss: 0.1289 - accuracy: 0.9583 - 17ms/epoch - 2ms/step
+Epoch 31/100
+8/8 - 0s - loss: 0.1201 - accuracy: 0.9583 - 15ms/epoch - 2ms/step
+Epoch 32/100
+8/8 - 0s - loss: 0.1153 - accuracy: 0.9667 - 39ms/epoch - 5ms/step
+Epoch 33/100
+8/8 - 0s - loss: 0.1114 - accuracy: 0.9583 - 14ms/epoch - 2ms/step
+Epoch 34/100
+8/8 - 0s - loss: 0.1064 - accuracy: 0.9583 - 14ms/epoch - 2ms/step
+Epoch 35/100
+8/8 - 0s - loss: 0.1031 - accuracy: 0.9667 - 16ms/epoch - 2ms/step
+Epoch 36/100
+8/8 - 0s - loss: 0.0991 - accuracy: 0.9750 - 21ms/epoch - 3ms/step
+Epoch 37/100
+8/8 - 0s - loss: 0.0964 - accuracy: 0.9583 - 17ms/epoch - 2ms/step
+Epoch 38/100
+8/8 - 0s - loss: 0.0934 - accuracy: 0.9667 - 16ms/epoch - 2ms/step
+Epoch 39/100
+8/8 - 0s - loss: 0.0910 - accuracy: 0.9750 - 24ms/epoch - 3ms/step
+Epoch 40/100
+8/8 - 0s - loss: 0.0885 - accuracy: 0.9750 - 23ms/epoch - 3ms/step
+Epoch 41/100
+8/8 - 0s - loss: 0.0868 - accuracy: 0.9583 - 19ms/epoch - 2ms/step
+Epoch 42/100
+8/8 - 0s - loss: 0.0852 - accuracy: 0.9667 - 18ms/epoch - 2ms/step
+Epoch 43/100
+8/8 - 0s - loss: 0.0814 - accuracy: 0.9750 - 20ms/epoch - 3ms/step
+Epoch 44/100
+8/8 - 0s - loss: 0.0792 - accuracy: 0.9750 - 23ms/epoch - 3ms/step
+Epoch 45/100
+8/8 - 0s - loss: 0.0776 - accuracy: 0.9750 - 14ms/epoch - 2ms/step
+Epoch 46/100
+8/8 - 0s - loss: 0.0759 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 47/100
+8/8 - 0s - loss: 0.0736 - accuracy: 0.9833 - 15ms/epoch - 2ms/step
+Epoch 48/100
+8/8 - 0s - loss: 0.0744 - accuracy: 0.9750 - 19ms/epoch - 2ms/step
+Epoch 49/100
+8/8 - 0s - loss: 0.0751 - accuracy: 0.9667 - 19ms/epoch - 2ms/step
+Epoch 50/100
+8/8 - 0s - loss: 0.0700 - accuracy: 0.9750 - 18ms/epoch - 2ms/step
+Epoch 51/100
+8/8 - 0s - loss: 0.0690 - accuracy: 0.9750 - 15ms/epoch - 2ms/step
+Epoch 52/100
+8/8 - 0s - loss: 0.0677 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 53/100
+8/8 - 0s - loss: 0.0691 - accuracy: 0.9750 - 18ms/epoch - 2ms/step
+Epoch 54/100
+8/8 - 0s - loss: 0.0679 - accuracy: 0.9667 - 16ms/epoch - 2ms/step
+Epoch 55/100
+8/8 - 0s - loss: 0.0648 - accuracy: 0.9750 - 23ms/epoch - 3ms/step
+Epoch 56/100
+8/8 - 0s - loss: 0.0651 - accuracy: 0.9833 - 20ms/epoch - 3ms/step
+Epoch 57/100
+8/8 - 0s - loss: 0.0624 - accuracy: 0.9750 - 19ms/epoch - 2ms/step
+Epoch 58/100
+8/8 - 0s - loss: 0.0617 - accuracy: 0.9833 - 17ms/epoch - 2ms/step
+Epoch 59/100
+8/8 - 0s - loss: 0.0622 - accuracy: 0.9833 - 19ms/epoch - 2ms/step
+Epoch 60/100
+8/8 - 0s - loss: 0.0605 - accuracy: 0.9750 - 14ms/epoch - 2ms/step
+Epoch 61/100
+8/8 - 0s - loss: 0.0611 - accuracy: 0.9750 - 18ms/epoch - 2ms/step
+Epoch 62/100
+8/8 - 0s - loss: 0.0586 - accuracy: 0.9750 - 14ms/epoch - 2ms/step
+Epoch 63/100
+8/8 - 0s - loss: 0.0585 - accuracy: 0.9750 - 20ms/epoch - 3ms/step
+Epoch 64/100
+8/8 - 0s - loss: 0.0586 - accuracy: 0.9750 - 19ms/epoch - 2ms/step
+Epoch 65/100
+8/8 - 0s - loss: 0.0576 - accuracy: 0.9750 - 22ms/epoch - 3ms/step
+Epoch 66/100
+8/8 - 0s - loss: 0.0588 - accuracy: 0.9750 - 16ms/epoch - 2ms/step
+Epoch 67/100
+8/8 - 0s - loss: 0.0562 - accuracy: 0.9833 - 19ms/epoch - 2ms/step
+Epoch 68/100
+8/8 - 0s - loss: 0.0557 - accuracy: 0.9750 - 12ms/epoch - 2ms/step
+Epoch 69/100
+8/8 - 0s - loss: 0.0553 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 70/100
+8/8 - 0s - loss: 0.0554 - accuracy: 0.9750 - 15ms/epoch - 2ms/step
+Epoch 71/100
+8/8 - 0s - loss: 0.0546 - accuracy: 0.9833 - 17ms/epoch - 2ms/step
+Epoch 72/100
+8/8 - 0s - loss: 0.0537 - accuracy: 0.9833 - 17ms/epoch - 2ms/step
+Epoch 73/100
+8/8 - 0s - loss: 0.0557 - accuracy: 0.9750 - 14ms/epoch - 2ms/step
+Epoch 74/100
+8/8 - 0s - loss: 0.0531 - accuracy: 0.9750 - 24ms/epoch - 3ms/step
+Epoch 75/100
+8/8 - 0s - loss: 0.0539 - accuracy: 0.9750 - 19ms/epoch - 2ms/step
+Epoch 76/100
+8/8 - 0s - loss: 0.0527 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 77/100
+8/8 - 0s - loss: 0.0530 - accuracy: 0.9750 - 15ms/epoch - 2ms/step
+Epoch 78/100
+8/8 - 0s - loss: 0.0520 - accuracy: 0.9833 - 16ms/epoch - 2ms/step
+Epoch 79/100
+8/8 - 0s - loss: 0.0516 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 80/100
+8/8 - 0s - loss: 0.0518 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 81/100
+8/8 - 0s - loss: 0.0513 - accuracy: 0.9750 - 20ms/epoch - 3ms/step
+Epoch 82/100
+8/8 - 0s - loss: 0.0499 - accuracy: 0.9833 - 23ms/epoch - 3ms/step
+Epoch 83/100
+8/8 - 0s - loss: 0.0551 - accuracy: 0.9833 - 12ms/epoch - 2ms/step
+Epoch 84/100
+8/8 - 0s - loss: 0.0499 - accuracy: 0.9833 - 20ms/epoch - 3ms/step
+Epoch 85/100
+8/8 - 0s - loss: 0.0513 - accuracy: 0.9750 - 21ms/epoch - 3ms/step
+Epoch 86/100
+8/8 - 0s - loss: 0.0489 - accuracy: 0.9750 - 17ms/epoch - 2ms/step
+Epoch 87/100
+8/8 - 0s - loss: 0.0480 - accuracy: 0.9833 - 15ms/epoch - 2ms/step
+Epoch 88/100
+8/8 - 0s - loss: 0.0510 - accuracy: 0.9833 - 16ms/epoch - 2ms/step
+Epoch 89/100
+8/8 - 0s - loss: 0.0520 - accuracy: 0.9833 - 17ms/epoch - 2ms/step
+Epoch 90/100
+8/8 - 0s - loss: 0.0496 - accuracy: 0.9833 - 17ms/epoch - 2ms/step
+Epoch 91/100
+8/8 - 0s - loss: 0.0471 - accuracy: 0.9833 - 14ms/epoch - 2ms/step
+Epoch 92/100
+8/8 - 0s - loss: 0.0469 - accuracy: 0.9833 - 22ms/epoch - 3ms/step
+Epoch 93/100
+8/8 - 0s - loss: 0.0476 - accuracy: 0.9833 - 14ms/epoch - 2ms/step
+Epoch 94/100
+8/8 - 0s - loss: 0.0472 - accuracy: 0.9833 - 18ms/epoch - 2ms/step
+Epoch 95/100
+8/8 - 0s - loss: 0.0461 - accuracy: 0.9833 - 22ms/epoch - 3ms/step
+Epoch 96/100
+8/8 - 0s - loss: 0.0457 - accuracy: 0.9833 - 22ms/epoch - 3ms/step
+Epoch 97/100
+8/8 - 0s - loss: 0.0458 - accuracy: 0.9833 - 15ms/epoch - 2ms/step
+Epoch 98/100
+8/8 - 0s - loss: 0.0467 - accuracy: 0.9833 - 18ms/epoch - 2ms/step
+Epoch 99/100
+8/8 - 0s - loss: 0.0468 - accuracy: 0.9833 - 15ms/epoch - 2ms/step
+Epoch 100/100
+8/8 - 0s - loss: 0.0462 - accuracy: 0.9833 - 15ms/epoch - 2ms/step
+1/1 - 0s - loss: 0.0216 - accuracy: 1.0000 - 178ms/epoch - 178ms/step
+Acurácia no conjunto de teste: 100.00%
+1/1 [==============================] - 0s 101ms/step
+A flor pertence à classe: Setosa
+1/1 [==============================] - 0s 33ms/step
+              precision    recall  f1-score   support
+
+      Setosa       1.00      1.00      1.00        10
+  Versicolor       1.00      1.00      1.00         9
+   Virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="nn_dl_exercises_files/figure-html/cell-21-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="nn_dl_exercises_files/figure-html/cell-21-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="nn_dl_exercises_files/figure-html/cell-21-output-5.png" class="img-fluid"></p>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Considere a base de dados encontrada em Irisdat.xlsx. Daí, pede-se: a) Treinar um PMC que classifique observações de flores íris em 3 espécies (Setosa, Versicolor e Virginica) usando como entradas as características SEPALLENGTH (SL), SEPALWIDTH (SW), PETALLENGTH (PL) e PETALWIDTH (PW). b) Estime SL a partir de SW, PL, PW.</li>
+</ol>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPClassifier</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co">#print(os.getcwd())</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># current_directory = os.path.dirname(os.path.abspath(__file__))</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># os.path.abspath('')</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co"># file_path = os.path.join(current_directory, "Irisdat.xlsx")</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> os.path.abspath(<span class="st">"Irisdat.xlsx"</span>)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_excel(file_path)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># # Carregar os dados do arquivo Excel</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co"># data = pd.read_excel("Irisdat.xls")</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # Exibir as primeiras linhas do conjunto de dados para compreendê-lo</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.head())</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar as características (entradas) e os rótulos (espécies)</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">"SL"</span>, <span class="st">"SW"</span>, <span class="st">"PL"</span>, <span class="st">"PW"</span>]]</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">"Species"</span>]</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividir os dados em conjuntos de treinamento e teste (80% para treinamento, 20% para teste)</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Padronizar os dados (média 0, desvio padrão 1) usando o StandardScaler original</span></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Treinar um Perceptron Multicamadas (PMC) para classificar as espécies</span></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>mlp <span class="op">=</span> MLPClassifier(hidden_layer_sizes<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>), max_iter<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>mlp.fit(X_train, y_train)</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Avaliar o modelo PMC</span></span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> mlp.predict(X_test)</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Relatório de Classificação:</span><span class="ch">\n</span><span class="st">"</span>, classification_report(y_test, y_pred))</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Treinar um modelo de regressão linear para estimar SL com base em SW, PL e PW</span></span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>X_reg <span class="op">=</span> data[[<span class="st">"SW"</span>, <span class="st">"PL"</span>, <span class="st">"PW"</span>]]</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>y_reg <span class="op">=</span> data[<span class="st">"SL"</span>]</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Padronizar os dados para o modelo de regressão linear com base em SW, PL e PW</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>scaler_reg <span class="op">=</span> StandardScaler()</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>X_reg <span class="op">=</span> scaler_reg.fit_transform(X_reg)</span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>reg.fit(X_reg, y_reg)</span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar SL a partir de SW, PL e PW</span></span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a>input_data <span class="op">=</span> np.array([[<span class="fl">3.5</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>]])  <span class="co"># Substitua com os valores de SW, PL e PW que deseja estimar SL</span></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a>scaled_input_data <span class="op">=</span> scaler_reg.transform(input_data)</span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>estimated_SL <span class="op">=</span> reg.predict(scaled_input_data)</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimativa de SL: </span><span class="sc">{</span>estimated_SL[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    SL   SW   PL   PW   Species
+0  5.0  3.3  1.4  0.2    SETOSA
+1  6.4  2.8  5.6  2.2  VIRGINIC
+2  6.5  2.8  4.6  1.5  VERSICOL
+3  6.7  3.1  5.6  2.4  VIRGINIC
+4  6.3  2.8  5.1  1.5  VIRGINIC
+Relatório de Classificação:
+               precision    recall  f1-score   support
+
+      SETOSA       1.00      1.00      1.00         9
+    VERSICOL       0.82      0.90      0.86        10
+    VIRGINIC       0.89      0.80      0.84        10
+
+    accuracy                           0.90        29
+   macro avg       0.90      0.90      0.90        29
+weighted avg       0.90      0.90      0.90        29
+
+Estimativa de SL: 5.08542253752676</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tecnoind\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(</code></pre>
+</div>
+</div>
+<ol start="7" type="1">
+<li>Considere a base de dados encontrada em engines.xlsx, em que ‘Fuel rate’ e ‘Speed’ são variáveis de entrada e ‘Torque’ e ‘Nitrous Oxide Emissions (NOE)’ são as variáveis de saída, respectivamente. Desenvolva três regressores. Um deles deve estimar conjuntamente o ‘Torque’ e o NOE. Já os outros dois devem estimar essas saídas separadamente (i.e.&nbsp;um estimará o Torque e o outro o NOE). Compare o desempenho das duas estratégias apontando qual delas apresenta uma maior capacidade de generalização.</li>
+</ol>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPRegressor</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> make_scorer</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print(os.getcwd())</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregar os dados do arquivo Excel</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="co"># current_directory = os.path.dirname(os.path.abspath(__file__))</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="co"># file_path = os.path.join(current_directory, "engines.xlsx")</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> os.path.abspath(<span class="st">'engines.xlsx'</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_excel(file_path)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar as características de entrada (X) e as variáveis de saída (Y)</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">"fuel rate"</span>, <span class="st">"speed"</span>]]</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[[<span class="st">"torque"</span>, <span class="st">"nitrous oxide emissions (NOE)"</span>]]</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividir os dados em conjuntos de treinamento e teste</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X, Y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Padronizar os dados (média 0, desvio padrão 1)</span></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="co">### PRIMEIRO MODELO</span></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Treinar o primeiro regressor para estimar "torque" e "NOE"</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>regressor1 <span class="op">=</span> MLPRegressor(hidden_layer_sizes<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>), max_iter<span class="op">=</span><span class="dv">10000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>regressor1.fit(X_train, Y_train)</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Fazer previsões usando o primeiro regressor</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>predictions1 <span class="op">=</span> regressor1.predict(X_test)</span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Avaliar o desempenho do primeiro regressor (por exemplo, com MSE)</span></span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>mse1 <span class="op">=</span> mean_squared_error(Y_test, predictions1)</span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE para regressor 1:"</span>, mse1)</span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a><span class="co">### SEGUNDO MODELO</span></span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Treinar o segundo regressor para estimar somente "torque"</span></span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>Y_train_torque <span class="op">=</span> Y_train[<span class="st">"torque"</span>]</span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a>regressor2 <span class="op">=</span> MLPRegressor(hidden_layer_sizes<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>), max_iter<span class="op">=</span><span class="dv">10000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a>regressor2.fit(X_train, Y_train_torque)</span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Fazer previsões usando o segundo regressor</span></span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a>predictions2 <span class="op">=</span> regressor2.predict(X_test)</span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Avaliar o desempenho do segundo regressor (por exemplo, com MSE)</span></span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a>mse2 <span class="op">=</span> mean_squared_error(Y_test[<span class="st">"torque"</span>], predictions2)</span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE para regressor 2 (torque):"</span>, mse2)</span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a><span class="co">### TERCEIRO MODELO</span></span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Treinar o terceiro regressor para estimar somente "NOE"</span></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>Y_train_noe <span class="op">=</span> Y_train[<span class="st">"nitrous oxide emissions (NOE)"</span>]</span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a>regressor3 <span class="op">=</span> MLPRegressor(hidden_layer_sizes<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>), max_iter<span class="op">=</span><span class="dv">10000</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a>regressor3.fit(X_train, Y_train_noe)</span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Fazer previsões usando o terceiro regressor</span></span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a>predictions3 <span class="op">=</span> regressor3.predict(X_test)</span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Avaliar o desempenho do terceiro regressor (por exemplo, com MSE)</span></span>
+<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a>mse3 <span class="op">=</span> mean_squared_error(Y_test[<span class="st">"nitrous oxide emissions (NOE)"</span>], predictions3)</span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MSE para regressor 3 (NOE):"</span>, mse3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE para regressor 1: 10152.975156644128
+MSE para regressor 2 (torque): 459.62327720999474
+MSE para regressor 3 (NOE): 19090.223831557134</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">### AVALIANDO MELHOR A CAPACIDADE DE GENERALIZAÇÃO DOS REGRESSORES</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">### ---------------------------------------------------------------------------------------------</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> custom_mse(y_true, y_pred):</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mean_squared_error(y_true, y_pred)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Validação cruzada com MSE personalizado</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>mse_scorer <span class="op">=</span> make_scorer(custom_mse, greater_is_better<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressor 1 (torque e NOE)</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>scores1 <span class="op">=</span> <span class="op">-</span>cross_val_score(regressor1, X, Y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span>mse_scorer)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>mean_score1 <span class="op">=</span> scores1.mean()</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>std_score1 <span class="op">=</span> scores1.std()</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressor 2 (somente torque)</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>scores2 <span class="op">=</span> <span class="op">-</span>cross_val_score(regressor2, X, Y[<span class="st">"torque"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span>mse_scorer)</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>mean_score2 <span class="op">=</span> scores2.mean()</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>std_score2 <span class="op">=</span> scores2.std()</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Regressor 3 (somente NOE)</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>scores3 <span class="op">=</span> <span class="op">-</span>cross_val_score(regressor3, X, Y[<span class="st">"nitrous oxide emissions (NOE)"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span>mse_scorer)</span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>mean_score3 <span class="op">=</span> scores3.mean()</span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>std_score3 <span class="op">=</span> scores3.std()</span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Regressor 1 (torque e NOE) - MSE Médio:"</span>, mean_score1, <span class="st">"Desvio Padrão:"</span>, std_score1)</span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Regressor 2 (somente torque) - MSE Médio:"</span>, mean_score2, <span class="st">"Desvio Padrão:"</span>, std_score2)</span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Regressor 3 (somente NOE) - MSE Médio:"</span>, mean_score3, <span class="st">"Desvio Padrão:"</span>, std_score3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Regressor 1 (torque e NOE) - MSE Médio: 66417.2675522822 Desvio Padrão: 45149.659829828575
+Regressor 2 (somente torque) - MSE Médio: 2474.250283230132 Desvio Padrão: 1172.2613093811758
+Regressor 3 (somente NOE) - MSE Médio: 143385.97775100663 Desvio Padrão: 80364.00570653014</code></pre>
+</div>
+</div>
+<ol start="8" type="1">
+<li>Valendo-se da base de dados reais referente ao Volume de Vendas de Passagens (VVP) de uma companhia aérea norte-americana que se encontra no arquivo vvp.xlsx, pede-se: 1) Desenvolver um previsor neural que receba como entradas os VVPs registrados nos instantes k-1 e k-12 (i.e.&nbsp;VVP(k-1) e VVP(k-12)) e que disponibilize na saída o VVP no instante corrente k (i.e.&nbsp;VVP(k)). O previsor deverá realizar previsões recursivas de 1 a 12 passos à frente (i.e., de um a doze meses à frente); 2) De posse da base de dados, remova a tendência linear presente na base de dados original. Desse modo, você conhecerá a série destendenciada e a tendência linear. Para a primeira série, desenvolva um previsor neural que receba como entradas os VVPs registrados nos instantes k-1 e k-12 (i.e.&nbsp;VVP(k-1) e VVP(k-12)) e que disponibilize na saída o VVP no instante corrente k (i.e.&nbsp;VVP(k)). O previsor deverá realizar previsões recursivas de 1 a 12 passos à frente (i.e., de um a doze meses à frente). Para a segunda (i.e., a tendência linear), preveja linearmente os próximos dozes pontos. Em seguida, some ponto a ponto as duas previsões e compare o desempenho dessa abordagem com a anterior apontando qual delas apresenta uma maior capacidade de generalização.</li>
+</ol>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multilayer Perceptron to Predict International Airline Passengers (t+1, given t, t-1, t-2)</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co">#from tf.keras.models import Sequential</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co">#from tf.keras.layers import Dense</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co"># convert an array of values into a dataset matrix</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_dataset(dataset, look_back<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    dataX, dataY <span class="op">=</span> [], []</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(dataset)<span class="op">-</span>look_back<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> dataset[i:(i<span class="op">+</span>look_back), <span class="dv">0</span>]</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>        dataX.append(a)</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>        dataY.append(dataset[i <span class="op">+</span> look_back, <span class="dv">0</span>])</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(dataX), np.array(dataY)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> os.path.abspath(<span class="st">'airline-passengers.csv'</span>)</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="co">#data = pd.read_csv(file_path, usecols=[1], engine='python')</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> read_csv(file_path, usecols<span class="op">=</span>[<span class="dv">1</span>], engine<span class="op">=</span><span class="st">'python'</span>)</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataframe.values</span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.astype(<span class="st">'float32'</span>)</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(data)</span></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(dataset)</span></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.show</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a><span class="co"># split into train and test sets</span></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>train_size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(dataset) <span class="op">*</span> <span class="fl">0.67</span>)</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>test_size <span class="op">=</span> <span class="bu">len</span>(dataset) <span class="op">-</span> train_size</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> dataset[<span class="dv">0</span>:train_size,:], dataset[train_size:<span class="bu">len</span>(dataset),:]</span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a><span class="co"># reshape dataset</span></span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>look_back <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>trainX, trainY <span class="op">=</span> create_dataset(train, look_back)</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>testX, testY <span class="op">=</span> create_dataset(test, look_back)</span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a><span class="co"># create and fit Multilayer Perceptron model</span></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.models.Sequential()</span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a><span class="co">#model = Sequential()</span></span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">12</span>, input_shape<span class="op">=</span>(look_back,), activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">8</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">1</span>))</span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'mean_squared_error'</span>, optimizer<span class="op">=</span><span class="st">'adam'</span>)</span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>model.fit(trainX, trainY, epochs<span class="op">=</span><span class="dv">400</span>, batch_size<span class="op">=</span><span class="dv">2</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate model performance</span></span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>trainScore <span class="op">=</span> model.evaluate(trainX, trainY, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Train Score: </span><span class="sc">%.2f</span><span class="st"> MSE (</span><span class="sc">%.2f</span><span class="st"> RMSE)'</span> <span class="op">%</span> (trainScore, math.sqrt(trainScore)))</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>testScore <span class="op">=</span> model.evaluate(testX, testY, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test Score: </span><span class="sc">%.2f</span><span class="st"> MSE (</span><span class="sc">%.2f</span><span class="st"> RMSE)'</span> <span class="op">%</span> (testScore, math.sqrt(testScore)))</span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a><span class="co"># generate predictions for training</span></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a>trainPredict <span class="op">=</span> model.predict(trainX)</span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>testPredict <span class="op">=</span> model.predict(testX)</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a><span class="co"># shift train predictions for plotting</span></span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>trainPredictPlot <span class="op">=</span> np.empty_like(dataset)</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>trainPredictPlot[:, :] <span class="op">=</span> np.nan</span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>trainPredictPlot[look_back:<span class="bu">len</span>(trainPredict)<span class="op">+</span>look_back, :] <span class="op">=</span> trainPredict</span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a><span class="co"># shift test predictions for plotting</span></span>
+<span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a>testPredictPlot <span class="op">=</span> np.empty_like(dataset)</span>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a>testPredictPlot[:, :] <span class="op">=</span> np.nan</span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a>testPredictPlot[<span class="bu">len</span>(trainPredict)<span class="op">+</span>(look_back<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span>:<span class="bu">len</span>(dataset)<span class="op">-</span><span class="dv">1</span>, :] <span class="op">=</span> testPredict</span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a><span class="co"># plot baseline and predictions</span></span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a>plt.plot(dataset)</span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a>plt.plot(trainPredictPlot)</span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a>plt.plot(testPredictPlot)</span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1/400
+46/46 - 1s - loss: 52159.4414 - 1s/epoch - 26ms/step
+Epoch 2/400
+46/46 - 0s - loss: 40048.4414 - 70ms/epoch - 2ms/step
+Epoch 3/400
+46/46 - 0s - loss: 24242.7793 - 60ms/epoch - 1ms/step
+Epoch 4/400
+46/46 - 0s - loss: 8008.3887 - 62ms/epoch - 1ms/step
+Epoch 5/400
+46/46 - 0s - loss: 1680.6449 - 61ms/epoch - 1ms/step
+Epoch 6/400
+46/46 - 0s - loss: 1141.6036 - 61ms/epoch - 1ms/step
+Epoch 7/400
+46/46 - 0s - loss: 1114.0035 - 62ms/epoch - 1ms/step
+Epoch 8/400
+46/46 - 0s - loss: 1095.5594 - 64ms/epoch - 1ms/step
+Epoch 9/400
+46/46 - 0s - loss: 1076.6613 - 69ms/epoch - 1ms/step
+Epoch 10/400
+46/46 - 0s - loss: 1050.6646 - 65ms/epoch - 1ms/step
+Epoch 11/400
+46/46 - 0s - loss: 1028.4875 - 70ms/epoch - 2ms/step
+Epoch 12/400
+46/46 - 0s - loss: 1017.5328 - 65ms/epoch - 1ms/step
+Epoch 13/400
+46/46 - 0s - loss: 1010.1110 - 70ms/epoch - 2ms/step
+Epoch 14/400
+46/46 - 0s - loss: 1015.4542 - 73ms/epoch - 2ms/step
+Epoch 15/400
+46/46 - 0s - loss: 973.9664 - 76ms/epoch - 2ms/step
+Epoch 16/400
+46/46 - 0s - loss: 949.8926 - 77ms/epoch - 2ms/step
+Epoch 17/400
+46/46 - 0s - loss: 942.1044 - 65ms/epoch - 1ms/step
+Epoch 18/400
+46/46 - 0s - loss: 923.4607 - 70ms/epoch - 2ms/step
+Epoch 19/400
+46/46 - 0s - loss: 894.5743 - 62ms/epoch - 1ms/step
+Epoch 20/400
+46/46 - 0s - loss: 904.8045 - 60ms/epoch - 1ms/step
+Epoch 21/400
+46/46 - 0s - loss: 885.1188 - 58ms/epoch - 1ms/step
+Epoch 22/400
+46/46 - 0s - loss: 872.3201 - 60ms/epoch - 1ms/step
+Epoch 23/400
+46/46 - 0s - loss: 871.9184 - 76ms/epoch - 2ms/step
+Epoch 24/400
+46/46 - 0s - loss: 831.3074 - 68ms/epoch - 1ms/step
+Epoch 25/400
+46/46 - 0s - loss: 822.3945 - 64ms/epoch - 1ms/step
+Epoch 26/400
+46/46 - 0s - loss: 816.4449 - 57ms/epoch - 1ms/step
+Epoch 27/400
+46/46 - 0s - loss: 799.1009 - 60ms/epoch - 1ms/step
+Epoch 28/400
+46/46 - 0s - loss: 828.5497 - 60ms/epoch - 1ms/step
+Epoch 29/400
+46/46 - 0s - loss: 773.7534 - 81ms/epoch - 2ms/step
+Epoch 30/400
+46/46 - 0s - loss: 779.9119 - 68ms/epoch - 1ms/step
+Epoch 31/400
+46/46 - 0s - loss: 755.0265 - 61ms/epoch - 1ms/step
+Epoch 32/400
+46/46 - 0s - loss: 756.1535 - 58ms/epoch - 1ms/step
+Epoch 33/400
+46/46 - 0s - loss: 764.7589 - 61ms/epoch - 1ms/step
+Epoch 34/400
+46/46 - 0s - loss: 792.5414 - 57ms/epoch - 1ms/step
+Epoch 35/400
+46/46 - 0s - loss: 718.0131 - 58ms/epoch - 1ms/step
+Epoch 36/400
+46/46 - 0s - loss: 721.8303 - 60ms/epoch - 1ms/step
+Epoch 37/400
+46/46 - 0s - loss: 739.9062 - 64ms/epoch - 1ms/step
+Epoch 38/400
+46/46 - 0s - loss: 730.5903 - 60ms/epoch - 1ms/step
+Epoch 39/400
+46/46 - 0s - loss: 697.7212 - 60ms/epoch - 1ms/step
+Epoch 40/400
+46/46 - 0s - loss: 688.5353 - 59ms/epoch - 1ms/step
+Epoch 41/400
+46/46 - 0s - loss: 684.1525 - 59ms/epoch - 1ms/step
+Epoch 42/400
+46/46 - 0s - loss: 704.8807 - 61ms/epoch - 1ms/step
+Epoch 43/400
+46/46 - 0s - loss: 675.2859 - 62ms/epoch - 1ms/step
+Epoch 44/400
+46/46 - 0s - loss: 654.0298 - 62ms/epoch - 1ms/step
+Epoch 45/400
+46/46 - 0s - loss: 645.9775 - 63ms/epoch - 1ms/step
+Epoch 46/400
+46/46 - 0s - loss: 671.4019 - 60ms/epoch - 1ms/step
+Epoch 47/400
+46/46 - 0s - loss: 650.1794 - 61ms/epoch - 1ms/step
+Epoch 48/400
+46/46 - 0s - loss: 646.4860 - 61ms/epoch - 1ms/step
+Epoch 49/400
+46/46 - 0s - loss: 644.1277 - 57ms/epoch - 1ms/step
+Epoch 50/400
+46/46 - 0s - loss: 646.9231 - 62ms/epoch - 1ms/step
+Epoch 51/400
+46/46 - 0s - loss: 638.9140 - 58ms/epoch - 1ms/step
+Epoch 52/400
+46/46 - 0s - loss: 619.9387 - 56ms/epoch - 1ms/step
+Epoch 53/400
+46/46 - 0s - loss: 651.7075 - 70ms/epoch - 2ms/step
+Epoch 54/400
+46/46 - 0s - loss: 645.9838 - 56ms/epoch - 1ms/step
+Epoch 55/400
+46/46 - 0s - loss: 614.6115 - 88ms/epoch - 2ms/step
+Epoch 56/400
+46/46 - 0s - loss: 608.5164 - 58ms/epoch - 1ms/step
+Epoch 57/400
+46/46 - 0s - loss: 606.6644 - 57ms/epoch - 1ms/step
+Epoch 58/400
+46/46 - 0s - loss: 594.2741 - 64ms/epoch - 1ms/step
+Epoch 59/400
+46/46 - 0s - loss: 617.6648 - 58ms/epoch - 1ms/step
+Epoch 60/400
+46/46 - 0s - loss: 599.2371 - 66ms/epoch - 1ms/step
+Epoch 61/400
+46/46 - 0s - loss: 608.3755 - 65ms/epoch - 1ms/step
+Epoch 62/400
+46/46 - 0s - loss: 602.3696 - 61ms/epoch - 1ms/step
+Epoch 63/400
+46/46 - 0s - loss: 628.9077 - 59ms/epoch - 1ms/step
+Epoch 64/400
+46/46 - 0s - loss: 598.8511 - 63ms/epoch - 1ms/step
+Epoch 65/400
+46/46 - 0s - loss: 572.5056 - 61ms/epoch - 1ms/step
+Epoch 66/400
+46/46 - 0s - loss: 571.3424 - 58ms/epoch - 1ms/step
+Epoch 67/400
+46/46 - 0s - loss: 567.6759 - 63ms/epoch - 1ms/step
+Epoch 68/400
+46/46 - 0s - loss: 574.3069 - 59ms/epoch - 1ms/step
+Epoch 69/400
+46/46 - 0s - loss: 612.8312 - 64ms/epoch - 1ms/step
+Epoch 70/400
+46/46 - 0s - loss: 569.8830 - 60ms/epoch - 1ms/step
+Epoch 71/400
+46/46 - 0s - loss: 576.1068 - 58ms/epoch - 1ms/step
+Epoch 72/400
+46/46 - 0s - loss: 577.9520 - 63ms/epoch - 1ms/step
+Epoch 73/400
+46/46 - 0s - loss: 558.1109 - 62ms/epoch - 1ms/step
+Epoch 74/400
+46/46 - 0s - loss: 586.1981 - 59ms/epoch - 1ms/step
+Epoch 75/400
+46/46 - 0s - loss: 578.4450 - 57ms/epoch - 1ms/step
+Epoch 76/400
+46/46 - 0s - loss: 571.7636 - 58ms/epoch - 1ms/step
+Epoch 77/400
+46/46 - 0s - loss: 570.8085 - 59ms/epoch - 1ms/step
+Epoch 78/400
+46/46 - 0s - loss: 635.4999 - 63ms/epoch - 1ms/step
+Epoch 79/400
+46/46 - 0s - loss: 571.2514 - 61ms/epoch - 1ms/step
+Epoch 80/400
+46/46 - 0s - loss: 576.9852 - 61ms/epoch - 1ms/step
+Epoch 81/400
+46/46 - 0s - loss: 556.1328 - 58ms/epoch - 1ms/step
+Epoch 82/400
+46/46 - 0s - loss: 594.8279 - 59ms/epoch - 1ms/step
+Epoch 83/400
+46/46 - 0s - loss: 601.8413 - 60ms/epoch - 1ms/step
+Epoch 84/400
+46/46 - 0s - loss: 541.9011 - 60ms/epoch - 1ms/step
+Epoch 85/400
+46/46 - 0s - loss: 576.2898 - 64ms/epoch - 1ms/step
+Epoch 86/400
+46/46 - 0s - loss: 614.3669 - 63ms/epoch - 1ms/step
+Epoch 87/400
+46/46 - 0s - loss: 552.3895 - 62ms/epoch - 1ms/step
+Epoch 88/400
+46/46 - 0s - loss: 562.8985 - 60ms/epoch - 1ms/step
+Epoch 89/400
+46/46 - 0s - loss: 568.6850 - 59ms/epoch - 1ms/step
+Epoch 90/400
+46/46 - 0s - loss: 535.8540 - 61ms/epoch - 1ms/step
+Epoch 91/400
+46/46 - 0s - loss: 523.2029 - 56ms/epoch - 1ms/step
+Epoch 92/400
+46/46 - 0s - loss: 571.4894 - 55ms/epoch - 1ms/step
+Epoch 93/400
+46/46 - 0s - loss: 568.7151 - 55ms/epoch - 1ms/step
+Epoch 94/400
+46/46 - 0s - loss: 578.6927 - 58ms/epoch - 1ms/step
+Epoch 95/400
+46/46 - 0s - loss: 585.3685 - 55ms/epoch - 1ms/step
+Epoch 96/400
+46/46 - 0s - loss: 533.0620 - 58ms/epoch - 1ms/step
+Epoch 97/400
+46/46 - 0s - loss: 552.3387 - 57ms/epoch - 1ms/step
+Epoch 98/400
+46/46 - 0s - loss: 529.4078 - 57ms/epoch - 1ms/step
+Epoch 99/400
+46/46 - 0s - loss: 564.2271 - 57ms/epoch - 1ms/step
+Epoch 100/400
+46/46 - 0s - loss: 544.2092 - 59ms/epoch - 1ms/step
+Epoch 101/400
+46/46 - 0s - loss: 577.3278 - 69ms/epoch - 2ms/step
+Epoch 102/400
+46/46 - 0s - loss: 568.2449 - 60ms/epoch - 1ms/step
+Epoch 103/400
+46/46 - 0s - loss: 541.3272 - 64ms/epoch - 1ms/step
+Epoch 104/400
+46/46 - 0s - loss: 541.2688 - 62ms/epoch - 1ms/step
+Epoch 105/400
+46/46 - 0s - loss: 524.6962 - 61ms/epoch - 1ms/step
+Epoch 106/400
+46/46 - 0s - loss: 532.7940 - 60ms/epoch - 1ms/step
+Epoch 107/400
+46/46 - 0s - loss: 544.7991 - 61ms/epoch - 1ms/step
+Epoch 108/400
+46/46 - 0s - loss: 547.5400 - 62ms/epoch - 1ms/step
+Epoch 109/400
+46/46 - 0s - loss: 549.5498 - 61ms/epoch - 1ms/step
+Epoch 110/400
+46/46 - 0s - loss: 545.5475 - 62ms/epoch - 1ms/step
+Epoch 111/400
+46/46 - 0s - loss: 584.8599 - 61ms/epoch - 1ms/step
+Epoch 112/400
+46/46 - 0s - loss: 542.1002 - 60ms/epoch - 1ms/step
+Epoch 113/400
+46/46 - 0s - loss: 528.2589 - 63ms/epoch - 1ms/step
+Epoch 114/400
+46/46 - 0s - loss: 529.1003 - 59ms/epoch - 1ms/step
+Epoch 115/400
+46/46 - 0s - loss: 541.3328 - 61ms/epoch - 1ms/step
+Epoch 116/400
+46/46 - 0s - loss: 531.9324 - 64ms/epoch - 1ms/step
+Epoch 117/400
+46/46 - 0s - loss: 520.0269 - 62ms/epoch - 1ms/step
+Epoch 118/400
+46/46 - 0s - loss: 522.8900 - 63ms/epoch - 1ms/step
+Epoch 119/400
+46/46 - 0s - loss: 558.6283 - 64ms/epoch - 1ms/step
+Epoch 120/400
+46/46 - 0s - loss: 558.7735 - 72ms/epoch - 2ms/step
+Epoch 121/400
+46/46 - 0s - loss: 521.5864 - 62ms/epoch - 1ms/step
+Epoch 122/400
+46/46 - 0s - loss: 555.2297 - 64ms/epoch - 1ms/step
+Epoch 123/400
+46/46 - 0s - loss: 550.4213 - 64ms/epoch - 1ms/step
+Epoch 124/400
+46/46 - 0s - loss: 543.5871 - 70ms/epoch - 2ms/step
+Epoch 125/400
+46/46 - 0s - loss: 513.6312 - 66ms/epoch - 1ms/step
+Epoch 126/400
+46/46 - 0s - loss: 526.3843 - 63ms/epoch - 1ms/step
+Epoch 127/400
+46/46 - 0s - loss: 532.8829 - 62ms/epoch - 1ms/step
+Epoch 128/400
+46/46 - 0s - loss: 526.9546 - 65ms/epoch - 1ms/step
+Epoch 129/400
+46/46 - 0s - loss: 513.8516 - 67ms/epoch - 1ms/step
+Epoch 130/400
+46/46 - 0s - loss: 552.0101 - 63ms/epoch - 1ms/step
+Epoch 131/400
+46/46 - 0s - loss: 536.6365 - 64ms/epoch - 1ms/step
+Epoch 132/400
+46/46 - 0s - loss: 522.1378 - 59ms/epoch - 1ms/step
+Epoch 133/400
+46/46 - 0s - loss: 537.6760 - 62ms/epoch - 1ms/step
+Epoch 134/400
+46/46 - 0s - loss: 579.8944 - 61ms/epoch - 1ms/step
+Epoch 135/400
+46/46 - 0s - loss: 530.2017 - 63ms/epoch - 1ms/step
+Epoch 136/400
+46/46 - 0s - loss: 541.6473 - 64ms/epoch - 1ms/step
+Epoch 137/400
+46/46 - 0s - loss: 512.1055 - 61ms/epoch - 1ms/step
+Epoch 138/400
+46/46 - 0s - loss: 529.2709 - 64ms/epoch - 1ms/step
+Epoch 139/400
+46/46 - 0s - loss: 550.1074 - 61ms/epoch - 1ms/step
+Epoch 140/400
+46/46 - 0s - loss: 552.5619 - 63ms/epoch - 1ms/step
+Epoch 141/400
+46/46 - 0s - loss: 526.0905 - 63ms/epoch - 1ms/step
+Epoch 142/400
+46/46 - 0s - loss: 524.1754 - 62ms/epoch - 1ms/step
+Epoch 143/400
+46/46 - 0s - loss: 534.6418 - 61ms/epoch - 1ms/step
+Epoch 144/400
+46/46 - 0s - loss: 563.4869 - 61ms/epoch - 1ms/step
+Epoch 145/400
+46/46 - 0s - loss: 568.0093 - 61ms/epoch - 1ms/step
+Epoch 146/400
+46/46 - 0s - loss: 512.6028 - 61ms/epoch - 1ms/step
+Epoch 147/400
+46/46 - 0s - loss: 525.5396 - 62ms/epoch - 1ms/step
+Epoch 148/400
+46/46 - 0s - loss: 521.7332 - 62ms/epoch - 1ms/step
+Epoch 149/400
+46/46 - 0s - loss: 534.5916 - 62ms/epoch - 1ms/step
+Epoch 150/400
+46/46 - 0s - loss: 521.5613 - 64ms/epoch - 1ms/step
+Epoch 151/400
+46/46 - 0s - loss: 490.8190 - 59ms/epoch - 1ms/step
+Epoch 152/400
+46/46 - 0s - loss: 540.3724 - 54ms/epoch - 1ms/step
+Epoch 153/400
+46/46 - 0s - loss: 559.4398 - 53ms/epoch - 1ms/step
+Epoch 154/400
+46/46 - 0s - loss: 521.0609 - 55ms/epoch - 1ms/step
+Epoch 155/400
+46/46 - 0s - loss: 525.6100 - 56ms/epoch - 1ms/step
+Epoch 156/400
+46/46 - 0s - loss: 504.6988 - 58ms/epoch - 1ms/step
+Epoch 157/400
+46/46 - 0s - loss: 506.9253 - 56ms/epoch - 1ms/step
+Epoch 158/400
+46/46 - 0s - loss: 503.9444 - 52ms/epoch - 1ms/step
+Epoch 159/400
+46/46 - 0s - loss: 505.7878 - 68ms/epoch - 1ms/step
+Epoch 160/400
+46/46 - 0s - loss: 532.0679 - 54ms/epoch - 1ms/step
+Epoch 161/400
+46/46 - 0s - loss: 509.3373 - 53ms/epoch - 1ms/step
+Epoch 162/400
+46/46 - 0s - loss: 499.9030 - 58ms/epoch - 1ms/step
+Epoch 163/400
+46/46 - 0s - loss: 540.8605 - 59ms/epoch - 1ms/step
+Epoch 164/400
+46/46 - 0s - loss: 507.8543 - 60ms/epoch - 1ms/step
+Epoch 165/400
+46/46 - 0s - loss: 510.0326 - 58ms/epoch - 1ms/step
+Epoch 166/400
+46/46 - 0s - loss: 506.7883 - 58ms/epoch - 1ms/step
+Epoch 167/400
+46/46 - 0s - loss: 514.3741 - 59ms/epoch - 1ms/step
+Epoch 168/400
+46/46 - 0s - loss: 514.2775 - 88ms/epoch - 2ms/step
+Epoch 169/400
+46/46 - 0s - loss: 579.7114 - 59ms/epoch - 1ms/step
+Epoch 170/400
+46/46 - 0s - loss: 515.2660 - 69ms/epoch - 1ms/step
+Epoch 171/400
+46/46 - 0s - loss: 495.3631 - 63ms/epoch - 1ms/step
+Epoch 172/400
+46/46 - 0s - loss: 529.3326 - 64ms/epoch - 1ms/step
+Epoch 173/400
+46/46 - 0s - loss: 521.4478 - 62ms/epoch - 1ms/step
+Epoch 174/400
+46/46 - 0s - loss: 500.8549 - 64ms/epoch - 1ms/step
+Epoch 175/400
+46/46 - 0s - loss: 521.1213 - 55ms/epoch - 1ms/step
+Epoch 176/400
+46/46 - 0s - loss: 548.0806 - 53ms/epoch - 1ms/step
+Epoch 177/400
+46/46 - 0s - loss: 518.9025 - 56ms/epoch - 1ms/step
+Epoch 178/400
+46/46 - 0s - loss: 529.2133 - 54ms/epoch - 1ms/step
+Epoch 179/400
+46/46 - 0s - loss: 512.8992 - 56ms/epoch - 1ms/step
+Epoch 180/400
+46/46 - 0s - loss: 520.7649 - 57ms/epoch - 1ms/step
+Epoch 181/400
+46/46 - 0s - loss: 512.1344 - 53ms/epoch - 1ms/step
+Epoch 182/400
+46/46 - 0s - loss: 542.4543 - 54ms/epoch - 1ms/step
+Epoch 183/400
+46/46 - 0s - loss: 519.5512 - 55ms/epoch - 1ms/step
+Epoch 184/400
+46/46 - 0s - loss: 534.1584 - 56ms/epoch - 1ms/step
+Epoch 185/400
+46/46 - 0s - loss: 560.3856 - 57ms/epoch - 1ms/step
+Epoch 186/400
+46/46 - 0s - loss: 529.9239 - 57ms/epoch - 1ms/step
+Epoch 187/400
+46/46 - 0s - loss: 500.9723 - 60ms/epoch - 1ms/step
+Epoch 188/400
+46/46 - 0s - loss: 507.5660 - 54ms/epoch - 1ms/step
+Epoch 189/400
+46/46 - 0s - loss: 506.0662 - 61ms/epoch - 1ms/step
+Epoch 190/400
+46/46 - 0s - loss: 539.2258 - 54ms/epoch - 1ms/step
+Epoch 191/400
+46/46 - 0s - loss: 516.2682 - 58ms/epoch - 1ms/step
+Epoch 192/400
+46/46 - 0s - loss: 509.8884 - 55ms/epoch - 1ms/step
+Epoch 193/400
+46/46 - 0s - loss: 518.4760 - 57ms/epoch - 1ms/step
+Epoch 194/400
+46/46 - 0s - loss: 496.5464 - 56ms/epoch - 1ms/step
+Epoch 195/400
+46/46 - 0s - loss: 490.9482 - 54ms/epoch - 1ms/step
+Epoch 196/400
+46/46 - 0s - loss: 569.5194 - 55ms/epoch - 1ms/step
+Epoch 197/400
+46/46 - 0s - loss: 496.5118 - 55ms/epoch - 1ms/step
+Epoch 198/400
+46/46 - 0s - loss: 550.0624 - 59ms/epoch - 1ms/step
+Epoch 199/400
+46/46 - 0s - loss: 508.6147 - 55ms/epoch - 1ms/step
+Epoch 200/400
+46/46 - 0s - loss: 519.1295 - 58ms/epoch - 1ms/step
+Epoch 201/400
+46/46 - 0s - loss: 506.9543 - 58ms/epoch - 1ms/step
+Epoch 202/400
+46/46 - 0s - loss: 493.3607 - 59ms/epoch - 1ms/step
+Epoch 203/400
+46/46 - 0s - loss: 493.7902 - 60ms/epoch - 1ms/step
+Epoch 204/400
+46/46 - 0s - loss: 526.1950 - 58ms/epoch - 1ms/step
+Epoch 205/400
+46/46 - 0s - loss: 516.6084 - 57ms/epoch - 1ms/step
+Epoch 206/400
+46/46 - 0s - loss: 511.0370 - 56ms/epoch - 1ms/step
+Epoch 207/400
+46/46 - 0s - loss: 523.3807 - 57ms/epoch - 1ms/step
+Epoch 208/400
+46/46 - 0s - loss: 507.7143 - 57ms/epoch - 1ms/step
+Epoch 209/400
+46/46 - 0s - loss: 491.4610 - 57ms/epoch - 1ms/step
+Epoch 210/400
+46/46 - 0s - loss: 510.8127 - 56ms/epoch - 1ms/step
+Epoch 211/400
+46/46 - 0s - loss: 506.5213 - 58ms/epoch - 1ms/step
+Epoch 212/400
+46/46 - 0s - loss: 481.2178 - 56ms/epoch - 1ms/step
+Epoch 213/400
+46/46 - 0s - loss: 533.1763 - 57ms/epoch - 1ms/step
+Epoch 214/400
+46/46 - 0s - loss: 549.5856 - 56ms/epoch - 1ms/step
+Epoch 215/400
+46/46 - 0s - loss: 517.4766 - 58ms/epoch - 1ms/step
+Epoch 216/400
+46/46 - 0s - loss: 514.5476 - 56ms/epoch - 1ms/step
+Epoch 217/400
+46/46 - 0s - loss: 540.5269 - 66ms/epoch - 1ms/step
+Epoch 218/400
+46/46 - 0s - loss: 538.9012 - 59ms/epoch - 1ms/step
+Epoch 219/400
+46/46 - 0s - loss: 488.5428 - 56ms/epoch - 1ms/step
+Epoch 220/400
+46/46 - 0s - loss: 484.8596 - 53ms/epoch - 1ms/step
+Epoch 221/400
+46/46 - 0s - loss: 507.1089 - 54ms/epoch - 1ms/step
+Epoch 222/400
+46/46 - 0s - loss: 472.8830 - 59ms/epoch - 1ms/step
+Epoch 223/400
+46/46 - 0s - loss: 502.9534 - 53ms/epoch - 1ms/step
+Epoch 224/400
+46/46 - 0s - loss: 505.2683 - 54ms/epoch - 1ms/step
+Epoch 225/400
+46/46 - 0s - loss: 597.3632 - 56ms/epoch - 1ms/step
+Epoch 226/400
+46/46 - 0s - loss: 549.1993 - 54ms/epoch - 1ms/step
+Epoch 227/400
+46/46 - 0s - loss: 487.2126 - 53ms/epoch - 1ms/step
+Epoch 228/400
+46/46 - 0s - loss: 533.6414 - 57ms/epoch - 1ms/step
+Epoch 229/400
+46/46 - 0s - loss: 483.5689 - 56ms/epoch - 1ms/step
+Epoch 230/400
+46/46 - 0s - loss: 495.1382 - 58ms/epoch - 1ms/step
+Epoch 231/400
+46/46 - 0s - loss: 537.6959 - 55ms/epoch - 1ms/step
+Epoch 232/400
+46/46 - 0s - loss: 489.2073 - 57ms/epoch - 1ms/step
+Epoch 233/400
+46/46 - 0s - loss: 547.2191 - 55ms/epoch - 1ms/step
+Epoch 234/400
+46/46 - 0s - loss: 507.0229 - 56ms/epoch - 1ms/step
+Epoch 235/400
+46/46 - 0s - loss: 514.5062 - 57ms/epoch - 1ms/step
+Epoch 236/400
+46/46 - 0s - loss: 520.9651 - 57ms/epoch - 1ms/step
+Epoch 237/400
+46/46 - 0s - loss: 511.2634 - 56ms/epoch - 1ms/step
+Epoch 238/400
+46/46 - 0s - loss: 487.3632 - 60ms/epoch - 1ms/step
+Epoch 239/400
+46/46 - 0s - loss: 521.5334 - 60ms/epoch - 1ms/step
+Epoch 240/400
+46/46 - 0s - loss: 502.8820 - 62ms/epoch - 1ms/step
+Epoch 241/400
+46/46 - 0s - loss: 517.0305 - 61ms/epoch - 1ms/step
+Epoch 242/400
+46/46 - 0s - loss: 498.2232 - 61ms/epoch - 1ms/step
+Epoch 243/400
+46/46 - 0s - loss: 501.7273 - 58ms/epoch - 1ms/step
+Epoch 244/400
+46/46 - 0s - loss: 475.5939 - 58ms/epoch - 1ms/step
+Epoch 245/400
+46/46 - 0s - loss: 523.5582 - 60ms/epoch - 1ms/step
+Epoch 246/400
+46/46 - 0s - loss: 500.3284 - 56ms/epoch - 1ms/step
+Epoch 247/400
+46/46 - 0s - loss: 492.2668 - 59ms/epoch - 1ms/step
+Epoch 248/400
+46/46 - 0s - loss: 505.5105 - 57ms/epoch - 1ms/step
+Epoch 249/400
+46/46 - 0s - loss: 500.8178 - 57ms/epoch - 1ms/step
+Epoch 250/400
+46/46 - 0s - loss: 504.1027 - 57ms/epoch - 1ms/step
+Epoch 251/400
+46/46 - 0s - loss: 518.6803 - 61ms/epoch - 1ms/step
+Epoch 252/400
+46/46 - 0s - loss: 501.8011 - 62ms/epoch - 1ms/step
+Epoch 253/400
+46/46 - 0s - loss: 503.7820 - 61ms/epoch - 1ms/step
+Epoch 254/400
+46/46 - 0s - loss: 554.1089 - 58ms/epoch - 1ms/step
+Epoch 255/400
+46/46 - 0s - loss: 502.3340 - 63ms/epoch - 1ms/step
+Epoch 256/400
+46/46 - 0s - loss: 550.1043 - 64ms/epoch - 1ms/step
+Epoch 257/400
+46/46 - 0s - loss: 491.3535 - 59ms/epoch - 1ms/step
+Epoch 258/400
+46/46 - 0s - loss: 502.2455 - 58ms/epoch - 1ms/step
+Epoch 259/400
+46/46 - 0s - loss: 487.3476 - 59ms/epoch - 1ms/step
+Epoch 260/400
+46/46 - 0s - loss: 487.1591 - 60ms/epoch - 1ms/step
+Epoch 261/400
+46/46 - 0s - loss: 489.2458 - 60ms/epoch - 1ms/step
+Epoch 262/400
+46/46 - 0s - loss: 485.0914 - 63ms/epoch - 1ms/step
+Epoch 263/400
+46/46 - 0s - loss: 485.8425 - 52ms/epoch - 1ms/step
+Epoch 264/400
+46/46 - 0s - loss: 499.9326 - 60ms/epoch - 1ms/step
+Epoch 265/400
+46/46 - 0s - loss: 511.4221 - 54ms/epoch - 1ms/step
+Epoch 266/400
+46/46 - 0s - loss: 487.5434 - 57ms/epoch - 1ms/step
+Epoch 267/400
+46/46 - 0s - loss: 486.7908 - 54ms/epoch - 1ms/step
+Epoch 268/400
+46/46 - 0s - loss: 507.4571 - 58ms/epoch - 1ms/step
+Epoch 269/400
+46/46 - 0s - loss: 557.5910 - 56ms/epoch - 1ms/step
+Epoch 270/400
+46/46 - 0s - loss: 501.5169 - 58ms/epoch - 1ms/step
+Epoch 271/400
+46/46 - 0s - loss: 486.6032 - 56ms/epoch - 1ms/step
+Epoch 272/400
+46/46 - 0s - loss: 504.7872 - 68ms/epoch - 1ms/step
+Epoch 273/400
+46/46 - 0s - loss: 504.2029 - 53ms/epoch - 1ms/step
+Epoch 274/400
+46/46 - 0s - loss: 481.5161 - 54ms/epoch - 1ms/step
+Epoch 275/400
+46/46 - 0s - loss: 485.1819 - 54ms/epoch - 1ms/step
+Epoch 276/400
+46/46 - 0s - loss: 513.1483 - 54ms/epoch - 1ms/step
+Epoch 277/400
+46/46 - 0s - loss: 485.5123 - 54ms/epoch - 1ms/step
+Epoch 278/400
+46/46 - 0s - loss: 479.3167 - 54ms/epoch - 1ms/step
+Epoch 279/400
+46/46 - 0s - loss: 546.6442 - 54ms/epoch - 1ms/step
+Epoch 280/400
+46/46 - 0s - loss: 509.9243 - 53ms/epoch - 1ms/step
+Epoch 281/400
+46/46 - 0s - loss: 495.4943 - 79ms/epoch - 2ms/step
+Epoch 282/400
+46/46 - 0s - loss: 474.8184 - 62ms/epoch - 1ms/step
+Epoch 283/400
+46/46 - 0s - loss: 490.0048 - 54ms/epoch - 1ms/step
+Epoch 284/400
+46/46 - 0s - loss: 576.3296 - 52ms/epoch - 1ms/step
+Epoch 285/400
+46/46 - 0s - loss: 477.8810 - 53ms/epoch - 1ms/step
+Epoch 286/400
+46/46 - 0s - loss: 488.5175 - 54ms/epoch - 1ms/step
+Epoch 287/400
+46/46 - 0s - loss: 471.1003 - 55ms/epoch - 1ms/step
+Epoch 288/400
+46/46 - 0s - loss: 519.8179 - 55ms/epoch - 1ms/step
+Epoch 289/400
+46/46 - 0s - loss: 507.4848 - 54ms/epoch - 1ms/step
+Epoch 290/400
+46/46 - 0s - loss: 535.8987 - 56ms/epoch - 1ms/step
+Epoch 291/400
+46/46 - 0s - loss: 487.6463 - 57ms/epoch - 1ms/step
+Epoch 292/400
+46/46 - 0s - loss: 508.6627 - 59ms/epoch - 1ms/step
+Epoch 293/400
+46/46 - 0s - loss: 500.2185 - 55ms/epoch - 1ms/step
+Epoch 294/400
+46/46 - 0s - loss: 505.5467 - 58ms/epoch - 1ms/step
+Epoch 295/400
+46/46 - 0s - loss: 466.3745 - 60ms/epoch - 1ms/step
+Epoch 296/400
+46/46 - 0s - loss: 458.0341 - 58ms/epoch - 1ms/step
+Epoch 297/400
+46/46 - 0s - loss: 516.8583 - 56ms/epoch - 1ms/step
+Epoch 298/400
+46/46 - 0s - loss: 480.2897 - 55ms/epoch - 1ms/step
+Epoch 299/400
+46/46 - 0s - loss: 495.8230 - 57ms/epoch - 1ms/step
+Epoch 300/400
+46/46 - 0s - loss: 509.0388 - 54ms/epoch - 1ms/step
+Epoch 301/400
+46/46 - 0s - loss: 522.5842 - 56ms/epoch - 1ms/step
+Epoch 302/400
+46/46 - 0s - loss: 489.5925 - 54ms/epoch - 1ms/step
+Epoch 303/400
+46/46 - 0s - loss: 514.1821 - 53ms/epoch - 1ms/step
+Epoch 304/400
+46/46 - 0s - loss: 487.4528 - 54ms/epoch - 1ms/step
+Epoch 305/400
+46/46 - 0s - loss: 485.3769 - 56ms/epoch - 1ms/step
+Epoch 306/400
+46/46 - 0s - loss: 514.1603 - 56ms/epoch - 1ms/step
+Epoch 307/400
+46/46 - 0s - loss: 511.7027 - 61ms/epoch - 1ms/step
+Epoch 308/400
+46/46 - 0s - loss: 522.4147 - 57ms/epoch - 1ms/step
+Epoch 309/400
+46/46 - 0s - loss: 468.4228 - 54ms/epoch - 1ms/step
+Epoch 310/400
+46/46 - 0s - loss: 492.0100 - 57ms/epoch - 1ms/step
+Epoch 311/400
+46/46 - 0s - loss: 490.8031 - 55ms/epoch - 1ms/step
+Epoch 312/400
+46/46 - 0s - loss: 485.1279 - 58ms/epoch - 1ms/step
+Epoch 313/400
+46/46 - 0s - loss: 502.2091 - 58ms/epoch - 1ms/step
+Epoch 314/400
+46/46 - 0s - loss: 517.0837 - 59ms/epoch - 1ms/step
+Epoch 315/400
+46/46 - 0s - loss: 504.3241 - 58ms/epoch - 1ms/step
+Epoch 316/400
+46/46 - 0s - loss: 486.4403 - 57ms/epoch - 1ms/step
+Epoch 317/400
+46/46 - 0s - loss: 497.3071 - 60ms/epoch - 1ms/step
+Epoch 318/400
+46/46 - 0s - loss: 487.9893 - 71ms/epoch - 2ms/step
+Epoch 319/400
+46/46 - 0s - loss: 481.3102 - 59ms/epoch - 1ms/step
+Epoch 320/400
+46/46 - 0s - loss: 497.3374 - 56ms/epoch - 1ms/step
+Epoch 321/400
+46/46 - 0s - loss: 478.0486 - 61ms/epoch - 1ms/step
+Epoch 322/400
+46/46 - 0s - loss: 493.3874 - 59ms/epoch - 1ms/step
+Epoch 323/400
+46/46 - 0s - loss: 489.2925 - 58ms/epoch - 1ms/step
+Epoch 324/400
+46/46 - 0s - loss: 505.3287 - 61ms/epoch - 1ms/step
+Epoch 325/400
+46/46 - 0s - loss: 468.8828 - 57ms/epoch - 1ms/step
+Epoch 326/400
+46/46 - 0s - loss: 497.9969 - 59ms/epoch - 1ms/step
+Epoch 327/400
+46/46 - 0s - loss: 501.7248 - 58ms/epoch - 1ms/step
+Epoch 328/400
+46/46 - 0s - loss: 510.7484 - 58ms/epoch - 1ms/step
+Epoch 329/400
+46/46 - 0s - loss: 505.4961 - 58ms/epoch - 1ms/step
+Epoch 330/400
+46/46 - 0s - loss: 525.9825 - 67ms/epoch - 1ms/step
+Epoch 331/400
+46/46 - 0s - loss: 495.7788 - 57ms/epoch - 1ms/step
+Epoch 332/400
+46/46 - 0s - loss: 484.9308 - 59ms/epoch - 1ms/step
+Epoch 333/400
+46/46 - 0s - loss: 488.6469 - 64ms/epoch - 1ms/step
+Epoch 334/400
+46/46 - 0s - loss: 479.2871 - 62ms/epoch - 1ms/step
+Epoch 335/400
+46/46 - 0s - loss: 535.6568 - 65ms/epoch - 1ms/step
+Epoch 336/400
+46/46 - 0s - loss: 469.4293 - 62ms/epoch - 1ms/step
+Epoch 337/400
+46/46 - 0s - loss: 484.7301 - 58ms/epoch - 1ms/step
+Epoch 338/400
+46/46 - 0s - loss: 510.2128 - 57ms/epoch - 1ms/step
+Epoch 339/400
+46/46 - 0s - loss: 490.0355 - 54ms/epoch - 1ms/step
+Epoch 340/400
+46/46 - 0s - loss: 475.6693 - 57ms/epoch - 1ms/step
+Epoch 341/400
+46/46 - 0s - loss: 487.2333 - 59ms/epoch - 1ms/step
+Epoch 342/400
+46/46 - 0s - loss: 500.5811 - 58ms/epoch - 1ms/step
+Epoch 343/400
+46/46 - 0s - loss: 504.0204 - 53ms/epoch - 1ms/step
+Epoch 344/400
+46/46 - 0s - loss: 472.2859 - 57ms/epoch - 1ms/step
+Epoch 345/400
+46/46 - 0s - loss: 473.4847 - 56ms/epoch - 1ms/step
+Epoch 346/400
+46/46 - 0s - loss: 513.8550 - 58ms/epoch - 1ms/step
+Epoch 347/400
+46/46 - 0s - loss: 540.8486 - 56ms/epoch - 1ms/step
+Epoch 348/400
+46/46 - 0s - loss: 520.9969 - 58ms/epoch - 1ms/step
+Epoch 349/400
+46/46 - 0s - loss: 488.9142 - 57ms/epoch - 1ms/step
+Epoch 350/400
+46/46 - 0s - loss: 529.9368 - 59ms/epoch - 1ms/step
+Epoch 351/400
+46/46 - 0s - loss: 488.1451 - 59ms/epoch - 1ms/step
+Epoch 352/400
+46/46 - 0s - loss: 490.8814 - 61ms/epoch - 1ms/step
+Epoch 353/400
+46/46 - 0s - loss: 478.9276 - 59ms/epoch - 1ms/step
+Epoch 354/400
+46/46 - 0s - loss: 506.6574 - 61ms/epoch - 1ms/step
+Epoch 355/400
+46/46 - 0s - loss: 484.8530 - 60ms/epoch - 1ms/step
+Epoch 356/400
+46/46 - 0s - loss: 504.4822 - 64ms/epoch - 1ms/step
+Epoch 357/400
+46/46 - 0s - loss: 483.6720 - 64ms/epoch - 1ms/step
+Epoch 358/400
+46/46 - 0s - loss: 489.8123 - 78ms/epoch - 2ms/step
+Epoch 359/400
+46/46 - 0s - loss: 520.7899 - 67ms/epoch - 1ms/step
+Epoch 360/400
+46/46 - 0s - loss: 524.3793 - 56ms/epoch - 1ms/step
+Epoch 361/400
+46/46 - 0s - loss: 476.4372 - 54ms/epoch - 1ms/step
+Epoch 362/400
+46/46 - 0s - loss: 464.2251 - 54ms/epoch - 1ms/step
+Epoch 363/400
+46/46 - 0s - loss: 510.0839 - 54ms/epoch - 1ms/step
+Epoch 364/400
+46/46 - 0s - loss: 505.4212 - 57ms/epoch - 1ms/step
+Epoch 365/400
+46/46 - 0s - loss: 513.8539 - 59ms/epoch - 1ms/step
+Epoch 366/400
+46/46 - 0s - loss: 482.9139 - 61ms/epoch - 1ms/step
+Epoch 367/400
+46/46 - 0s - loss: 467.6327 - 59ms/epoch - 1ms/step
+Epoch 368/400
+46/46 - 0s - loss: 484.4067 - 60ms/epoch - 1ms/step
+Epoch 369/400
+46/46 - 0s - loss: 441.3786 - 61ms/epoch - 1ms/step
+Epoch 370/400
+46/46 - 0s - loss: 501.2774 - 62ms/epoch - 1ms/step
+Epoch 371/400
+46/46 - 0s - loss: 485.7326 - 61ms/epoch - 1ms/step
+Epoch 372/400
+46/46 - 0s - loss: 476.5610 - 64ms/epoch - 1ms/step
+Epoch 373/400
+46/46 - 0s - loss: 490.3236 - 60ms/epoch - 1ms/step
+Epoch 374/400
+46/46 - 0s - loss: 495.1778 - 60ms/epoch - 1ms/step
+Epoch 375/400
+46/46 - 0s - loss: 495.5352 - 62ms/epoch - 1ms/step
+Epoch 376/400
+46/46 - 0s - loss: 479.2972 - 58ms/epoch - 1ms/step
+Epoch 377/400
+46/46 - 0s - loss: 497.2887 - 59ms/epoch - 1ms/step
+Epoch 378/400
+46/46 - 0s - loss: 506.1588 - 56ms/epoch - 1ms/step
+Epoch 379/400
+46/46 - 0s - loss: 487.1558 - 61ms/epoch - 1ms/step
+Epoch 380/400
+46/46 - 0s - loss: 480.5254 - 60ms/epoch - 1ms/step
+Epoch 381/400
+46/46 - 0s - loss: 485.6151 - 61ms/epoch - 1ms/step
+Epoch 382/400
+46/46 - 0s - loss: 508.5825 - 90ms/epoch - 2ms/step
+Epoch 383/400
+46/46 - 0s - loss: 511.8803 - 56ms/epoch - 1ms/step
+Epoch 384/400
+46/46 - 0s - loss: 500.1416 - 56ms/epoch - 1ms/step
+Epoch 385/400
+46/46 - 0s - loss: 459.3401 - 57ms/epoch - 1ms/step
+Epoch 386/400
+46/46 - 0s - loss: 489.7245 - 59ms/epoch - 1ms/step
+Epoch 387/400
+46/46 - 0s - loss: 485.5809 - 56ms/epoch - 1ms/step
+Epoch 388/400
+46/46 - 0s - loss: 493.6399 - 58ms/epoch - 1ms/step
+Epoch 389/400
+46/46 - 0s - loss: 478.3003 - 62ms/epoch - 1ms/step
+Epoch 390/400
+46/46 - 0s - loss: 514.9803 - 64ms/epoch - 1ms/step
+Epoch 391/400
+46/46 - 0s - loss: 492.4229 - 59ms/epoch - 1ms/step
+Epoch 392/400
+46/46 - 0s - loss: 484.4053 - 56ms/epoch - 1ms/step
+Epoch 393/400
+46/46 - 0s - loss: 476.6345 - 53ms/epoch - 1ms/step
+Epoch 394/400
+46/46 - 0s - loss: 486.4984 - 71ms/epoch - 2ms/step
+Epoch 395/400
+46/46 - 0s - loss: 514.8322 - 57ms/epoch - 1ms/step
+Epoch 396/400
+46/46 - 0s - loss: 503.7332 - 55ms/epoch - 1ms/step
+Epoch 397/400
+46/46 - 0s - loss: 488.4788 - 56ms/epoch - 1ms/step
+Epoch 398/400
+46/46 - 0s - loss: 476.2267 - 56ms/epoch - 1ms/step
+Epoch 399/400
+46/46 - 0s - loss: 507.4059 - 59ms/epoch - 1ms/step
+Epoch 400/400
+46/46 - 0s - loss: 473.5266 - 56ms/epoch - 1ms/step
+Train Score: 465.74 MSE (21.58 RMSE)
+Test Score: 1996.05 MSE (44.68 RMSE)
+3/3 [==============================] - 0s 2ms/step
+2/2 [==============================] - 0s 2ms/step</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="nn_dl_exercises_files/figure-html/cell-25-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>O gráfico acima mostra as predições do modelo: Azul = conjunto de dados inteiro, Laranja = treinamento, Verde = previsões.</p>
+<ol start="9" type="1">
+<li>Procure na literatura 2 artigos que tratem do tema Sensores Inferenciais (ou Soft Sensors) para uma dada grandeza de seu interesse (e.g.&nbsp;temperatura, pressão, vazão, nível etc.) e que tenham sido publicados nos últimos 5 anos. Explique de forma sucinta o que foi desenvolvido pelos autores, referenciando-os. Sugestão: As principais informações de qualquer artigo geralmente se encontram no título, no resumo e nas conclusões. Ao ler esses três itens, o leitor tem uma boa ideia do que esperar daquele trabalho. A propósito, usualmente o leitor decidirá se lerá todo o artigo ou não com base na sua impressão a respeito desses três itens.</li>
+</ol>
+<p><strong>Artigo 1: Data-driven soft sensors targeting heat pump systems</strong> Autores: Yang Song, Davide Rolando, Javier Marchante Avellaneda, Gerhard Zucker, Hatef Madani <a href="https://www.sciencedirect.com/science/article/pii/S0196890423001152">https://www.sciencedirect.com/science/article/pii/S0196890423001152</a><br></p>
+<p>Neste trabalho, os autores (Yang Song, Davide Rolando, Javier Marchante Avellaneda, Gerhard Zucker e Hatef Madani) desenvolveram Sensores Inferenciais (soft sensors) baseados em dados para compensar informações ausentes em sistemas de bombas de calor. Os soft sensors foram desenvolvidos usando um modelo de rede neural artificial (ANN), um modelo de regressão polinomial multivariado integrado e um modelo empírico, levando em consideração diferentes restrições, como disponibilidade de dados e informações durante o processo de estabelecimento do modelo. Os três modelos foram validados com dados de uma instalação de teste de campo e mostraram bom desempenho para todas as variáveis compensadas (taxa de fluxo de massa de refrigeração, sensores de pressão e potência do compressor), conforme tabela abaixo.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela1-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 1</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela2-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 2</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela3-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 3</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela5-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 5</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela6-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 6</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela7-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 7</figcaption>
+</figure>
+</div>
+<p>O modelo ANN foi o mais preciso, mas requer mais recursos adicionais para coletar dados de treinamento. O modelo de regressão polinomial multivariado integrado mostrou excelente precisão para a maioria dos soft sensors com dados de subcomponentes do fabricante, sem custo adicional. O estudo demonstrou o potencial dos soft sensors para substituir sensores físicos caros e abrir oportunidades para serviços inovadores com dados de monitoramento incompletos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tabela9-artigo1.PNG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tabela 9</figcaption>
+</figure>
+</div>
+<p>Isso inclui monitoramento do estado operacional da bomba de calor, previsão de consumo de energia e desenvolvimento de gêmeos digitais para gerenciamento avançado de energia.</p>
+<p><strong>Artigo 2: Soft sensors design in a petrochemical process using an Evolutionary Algorithm</strong> Autores: Gustavo A.P. de Morais, Bruno H.G. Barbosa, Danton D. Ferreira, Leonardo S. Paiva <a href="https://www.sciencedirect.com/science/article/pii/S0263224119307778?casa_token=W1xOW-naRKQAAAAA:ca54pHuAFLQvtGevvFeadfFwkGNeuuUehYL-vBljSBrTC1FC-a4RqkWX6SQKp8PsAjJZPXwCdZ0">https://www.sciencedirect.com/science/article/pii/S0263224119307778?casa_token=W1xOW-naRKQAAAAA:ca54pHuAFLQvtGevvFeadfFwkGNeuuUehYL-vBljSBrTC1FC-a4RqkWX6SQKp8PsAjJZPXwCdZ0</a><br></p>
+<p>Neste trabalho, os autores (Gustavo A.P. de Morais, Bruno H.G. Barbosa, Danton D. Ferreira e Leonardo S. Paiva) desenvolveram soft sensors para prever a pressão em poços de petróleo de águas profundas. Nestes ambientes, é crucial monitorar a pressão no fundo do poço para otimizar a produção de petróleo. O desafio é que os sensores reais localizados no leito do mar têm uma vida útil limitada devido às condições adversas, e a falta de informações precisas sobre a pressão pode afetar a produção de petróleo.<br> Para abordar esse problema, os autores propuseram um algoritmo chamado “Evolutionary Algorithm with Numerical Differentiation (EAND)” para projetar soft sensors capazes de prever a pressão no fundo do poço. Eles compararam o desempenho do EAND com outros algoritmos de otimização em problemas de otimização simulados para validar sua eficiência. O EAND mostrou convergência rápida e estabilidade. Além disso, os autores usaram o EAND para otimizar os soft sensors propostos para estimar a pressão no fundo do poço em cinco poços reais. O EAND foi comparado com outros métodos de projeto de soft sensors e mostrou a capacidade de encontrar automaticamente os melhores modelos de entrada para os soft sensors, tornando-o uma ferramenta valiosa, dada a complexidade das características dos poços de petróleo. Eles também testaram três modelos diferentes para construir modelos de conjunto, e o Random Forest obteve os melhores resultados em termos de erro percentual médio absoluto (MAPE).<br> Os resultados obtidos mostraram que os soft sensors desenvolvidos com o EAND têm uma precisão muito alta na previsão da pressão no fundo do poço, com erros muito baixos (de 0,1453% a 0,788%). Isso demonstra a eficácia tanto do algoritmo quanto dos modelos de soft sensor propostos.<br> O trabalho dos autores é significativo, pois propõe uma solução inovadora para um problema crítico na indústria de petróleo e gás. Ao desenvolver soft sensors eficazes e introduzir um algoritmo adaptativo como o EAND, eles possibilitaram a criação de sistemas de monitoramento mais robustos e confiáveis para a pressão no fundo do poço. Isso pode levar a uma produção mais eficiente de petróleo e uma melhor gestão dos recursos em poços submarinos, reduzindo a necessidade de substituição frequente de sensores físicos.</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
